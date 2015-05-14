@@ -22,13 +22,13 @@ app.jinja_env.undefined = StrictUndefined
 def index():
     """Homepage."""
 
-    return render_template("baseforfinal.html")
+    return render_template("homepage.html")
 
-# @app.route('/userprofile')
-# def index():
-#     """Homepage."""
+@app.route('/position', methods=['GET'])
+def index():
+    """This will show the a page for an user's positions."""
 
-#     return render_template("baseforfinal.html")
+    return render_template("position.html")
 
 
 if __name__ == "__main__":
