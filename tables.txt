@@ -1,0 +1,55 @@
+CREATE TABLE Company (
+company_id INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY, 
+company_name VARCHAR(100),
+industry VARCHAR(100),
+company_website_url VARCHAR(100)
+);
+
+CREATE TABLE Contacts (
+contact_id INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY, 
+contact_first_name VARCHAR(100),
+contact_last_name VARCHAR(100),
+contact_email_address VARCHAR(100),
+contact_company_id INTEGER REFERENCES Company,
+contact_company_name VARCHAR(100)
+contact_phone_number VARCHAR(50),
+contact_linkedin_profile VARCHAR(100),
+contact_type VARCHAR(100)
+);
+
+CREATE TABLE Position (
+position_id INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY,
+title VARCHAR(50),
+position_summary VARCHAR(3000),
+deadline_for_application_submission NULLABLE DATETIME,
+company_name VARCHAR(100) REFERENCES Company,
+location VARCHAR(50),
+application_status VARCHAR(50),
+position_url VARCHAR(100),
+user_id INTEGER REFERENCES User
+);
+
+CREATE TABLE Interviews (
+interview_id INTEGER AUTOINCREMENT NOT NULL PRIMARY KEY,
+interview_date DATETIME,
+position_summary VARCHAR(max),
+interview_type VARCHAR(100),
+interview_status VARCHAR(100),
+position_id INTEGER FOREIGN KEY
+);
+
+CREATE TABLE Notes (
+notes_id INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY, 
+note VARCHAR(3000),
+position_id INTEGER REFERENCES Position
+);
+
+CREATE TABLE 
+
+CREATE TABLE User_Assets (
+user_asset_id AUTO_INCREMENT NOT NULL PRIMARY KEY, 
+asset_type VARCHAR(100),
+asset_content VARCHAR(3000),
+position_id INTEGER NULLABLE REFERENCES Position,
+user_id INTEGER NULLABLE REFERENCES User 
+);
