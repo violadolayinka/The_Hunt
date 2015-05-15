@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<h4>Add a new position!</h4>
+<form action="/position">
+  <label for="title">Position Title: </label>
+  <input type="text" name="title">
+  <br>
+  <br>
+  <label for="position_summary">Position Summary: </label><br>
+    <textarea rows="4" cols="50">Enter the position details here!</textarea>
+  <br>
+  <br>
+  <label for="deadline_for_application_submission">What's your deadline?</label>
+  <input type="date" name="deadline_for_application_submission">
+  <br>
+  <br>
+  <label for="company_name">Company Name: </label>
+  <input type="text" name="company_name">
+  <br> 
+  <br>  
+  <label for="location">Location: </label>
+  <input type="text" name="location">
+  <br> 
+  <br>
+  <label for="application_status">Application Status: </label>
+  <input type="radio" name="status" value="not_yet_started"> Not Yet Started?
+  <input type="radio" name="status" value="in_progress"> In Progress  
+  <input type="radio" name="status" value="complete"> Complete 
+  <input type="radio" name="status" value="rejected"> Rejected
+  <br> 
+  <br>
+  <label for="position_url">Position Url: </label>
+  <input type="text" name="position_url">
+  <br>
+  <br>
+  <label for="submit"></label>
+  <input type="submit">
+
+</form>
+
+{% endblock %}

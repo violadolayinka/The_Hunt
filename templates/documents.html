@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h4>Keep track of your documents here!</h4>
+<form action="/position">
+  <label for="title">What type of document is this? </label>
+  <br>
+      <select>
+      <option value="cover_letter">Cover Letter</option>
+      <option value="resume">Resume</option>
+      <option value="professional_references">Professional References</option>
+     </select>
+  <br>
+  <br>
+  <label for="position_summary">Enter document text here: </label><br>
+    <textarea rows="4" cols="50"></textarea>
+  <br>
+  <br>
+  <input type="submit">
+  </form>              
+
+{% endblock %}
