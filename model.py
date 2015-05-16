@@ -34,9 +34,9 @@ class Position(db.Model):
     __tablename__ = "Position"
 
     position_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    title = db.Column(db.String(50), nullable=False, unique=True)
+    title = db.Column(db.String(50))
     position_summary = db.Column(db.String(300))
-    deadline_for_application_submission = db.Column(db.DateTime)
+    deadline = db.Column(db.DateTime)
     company_name = db.Column(db.String(100))
     location = db.Column(db.String(100))
     application_status = db.Column(db.String(50))

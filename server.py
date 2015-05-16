@@ -21,13 +21,14 @@ app.jinja_env.undefined = StrictUndefined
 @app.route('/')
 def index():
     """Homepage."""
-
+    # user = model.User.get.all()
     return render_template("base.html")
 
 
 @app.route('/position')
 def position_page():
     """This will show the a page for an user's positions."""
+    # user = model.Position.get_by id(id)
 
     return render_template("positions.html")
 

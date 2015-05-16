@@ -1,4 +1,4 @@
-1|Software Engineer|Here is dummy information about my position|enter DateTime|LinkedIn|California|in_progress|"https://engineering.linkedin.com/"
-2|Software Engineer|Here is dummy information about my position|enter DateTime|Twilio|Estonia|not_yet_started|"https://boards.greenhouse.io/twilio/jobs/54564"
-3|Software Engineer|Here is dummy information about my position|enter DateTime|Google|Maryland|completed|"https://www.google.com/about/careers/teams/engineering/swe/"
-4|Software Engineer|Here is dummy information about my position|enter DateTime|Accenture|Nigeria|completed|"blahblahblah.com"
+1|"Software Engineer"|"Here is dummy information about my position"|"LinkedIn"|"California"|"in_progress"|"https://engineering.linkedin.com/"
+2|"Software Engineer"|"Here is dummy information about my position"|"Twilio"|"Estonia"|"not_yet_started"|"https://boards.greenhouse.io/twilio/jobs/54564"
+3|"Software Engineer"|"Here is dummy information about my position"|"Google"|"Maryland"|"completed"|"https://www.google.com/about/careers/teams/engineering/swe/"
+4|"Software Engineer"|"Here is dummy information about my position"|"Accenture"|"Nigeria"|"completed"|"blahblahblah.com"

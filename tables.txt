@@ -44,7 +44,20 @@ note VARCHAR(3000),
 position_id INTEGER REFERENCES Position
 );
 
-CREATE TABLE 
+CREATE TABLE User(
+user_id INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY, 
+first_name VARCHAR(100),
+last_name VARCHAR(100),
+picture VARCHAR(100),
+email_address VARCHAR(100),
+last_login DATETIME,
+user_LinkedIn_url VARCHAR(100),
+user_Twitter_url VARCHAR(100),
+user_Facebook_url VARCHAR(100),
+user_website_url VARCHAR(100)
+);
+
+interview_id INTEGER REFERENCES Interviews
 
 CREATE TABLE User_Assets (
 user_asset_id AUTO_INCREMENT NOT NULL PRIMARY KEY, 
