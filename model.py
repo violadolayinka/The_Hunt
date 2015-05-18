@@ -1,16 +1,11 @@
 """Models and database functions for HB Spring 2015 Final project."""
 
-from flask_sqlalchemy import SQLAlchemy
 
-# This is the connection to the SQLite database; we're getting this through
-# the Flask-SQLAlchemy helper library. On this, we can find the `session`
-# object, where we do most of our interactions (like committing, etc.)
+from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
 
-##############################################################################
-# Model definitions
 class User(db.Model):
     """User"""
 
@@ -21,7 +16,7 @@ class User(db.Model):
     last_name = db.Column(db.String(100), nullable=False)
     picture = db.Column(db.String(100))
     email_address = db.Column(db.String(100))
-    last_login = db.Column(db.Date)
+    last_login = db.Column(db.String(60))
     user_LinkedIn_url = db.Column(db.String(100))
     user_Twitter_url = db.Column(db.String(100))
     user_Facebook_url = db.Column(db.String(100))
@@ -36,7 +31,7 @@ class Position(db.Model):
     position_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     title = db.Column(db.String(50))
     position_summary = db.Column(db.String(300))
-    deadline = db.Column(db.DateTime)
+    deadline = db.Column(db.String(60))
     company_name = db.Column(db.String(100))
     location = db.Column(db.String(100))
     application_status = db.Column(db.String(50))

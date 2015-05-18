@@ -3,40 +3,55 @@
 {% block body %}
 <h4>Add a new position!</h4>
 <form action="/position">
-  <label for="title">Position Title: </label>
-  <input type="text" name="title">
+  <div>
+    <label for="title">Position Title: </label>
+    <input type="text" name="title" value="title">
+  </div>
   <br>
   <br>
-  <label for="position_summary">Position Summary: </label><br>
-    <textarea rows="4" cols="50">Enter the position details here!</textarea>
+  <div>
+    <label for="position_summary">Position Summary: </label><br>
+    <textarea rows="4" cols="50" value="position_summary">Enter the position details here!</textarea>
+  </div>
   <br>
   <br>
-  <label for="deadline_for_application_submission">What's your deadline?</label>
-  <input type="date" name="deadline_for_application_submission">
+  <div>
+    <label for="deadline">What's your deadline?</label>
+      <input type="date" name="deadline" value="deadline">
+  </div>
   <br>
   <br>
-  <label for="company_name">Company Name: </label>
-  <input type="text" name="company_name">
+  <div>
+    <label for="company_name">Company Name: </label>
+      <input type="text" name="company_name" value="company_name">
+  </div>
   <br> 
-  <br>  
-  <label for="location">Location: </label>
-  <input type="text" name="location">
+  <br> 
+  <div> 
+    <label for="location">Location: </label>
+      <input type="text" name="location" value="location">
+  </div>
   <br> 
   <br>
-  <label for="application_status">Application Status: </label>
-  <input type="radio" name="status" value="not_yet_started"> Not Yet Started?
-  <input type="radio" name="status" value="in_progress"> In Progress  
-  <input type="radio" name="status" value="complete"> Complete 
-  <input type="radio" name="status" value="rejected"> Rejected
+  <div>
+    <label for="application_status">Application Status: </label>
+      <input type="radio" name="status" value="not_yet_started"> Not Yet Started?
+      <input type="radio" name="status" value="in_progress"> In Progress  
+      <input type="radio" name="status" value="complete"> Complete 
+      <input type="radio" name="status" value="rejected"> Rejected
+  </div>
   <br> 
   <br>
-  <label for="position_url">Position Url: </label>
-  <input type="text" name="position_url">
+  <div>
+    <label for="position_url">Position Url: </label>
+      <input type="text" name="position_url" value="position_url">
+  </div>
   <br>
   <br>
-  <label for="submit"></label>
-  <input type="submit">
-
+  <div>
+    <label for="submit"></label>
+      <input type="submit">
+  </div>
 </form>
 
 {% endblock %}
