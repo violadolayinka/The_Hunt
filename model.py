@@ -9,7 +9,7 @@ db = SQLAlchemy()
 class User(db.Model):
     """User"""
 
-    __tablename__ = "User"
+    __tablename__ = "user"
 
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     first_name = db.Column(db.String(100), nullable=False)
@@ -21,12 +21,19 @@ class User(db.Model):
     user_Twitter_url = db.Column(db.String(100))
     user_Facebook_url = db.Column(db.String(100))
     user_website_url = db.Column(db.String(100))
+    position_id = db.Column(db.Integer, db.ForeignKey('position.position_id'))
+
+    position = db.relationship("Position", backref=db.backref("user", order_by=user_id))
+
+    def __repr__(self):
+        """I'm adding this statement to make sure that my relationship is established"""
+        return "<User user_id=%s first_name=%d position_id=%s>" % (self.user_id, self.first_name, self.position_id)
 
 
 class Position(db.Model):
     """User's Positions"""
 
-    __tablename__ = "Position"
+    __tablename__ = "position"
 
     position_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     title = db.Column(db.String(50))
@@ -36,16 +43,26 @@ class Position(db.Model):
     location = db.Column(db.String(100))
     application_status = db.Column(db.String(50))
     position_url = db.Column(db.String(100))
+    user_asset_id = db.Column(db.Integer, db.ForeignKey('user_assets.user_asset_id'))
+
+    user_assets = db.relationship("User_Assets", backref=db.backref("position", order_by=position_id))
+
+    def __repr__(self):
+        """I'm adding this statement to make sure that my relationship is established"""
+        return "<Position position_id=%s title=%d user_asset_id=%s>" % (self.position_id, self.title, self.user_asset_id)
 
 
 class User_Assets(db.Model):
     """User's Job Applicaton Assets."""
 
-    __tablename__ = "User_Assets"
+    __tablename__ = "user_assets"
 
     user_asset_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     asset_type = db.Column(db.String(100))
     asset_content = db.Column(db.String(3000))
+
+
+
     # position_id = db.Column(db.String(200), nullable=True)
 # class Company(db.Model):
 #     """User's Bookmarked Companies."""

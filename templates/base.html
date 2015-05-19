@@ -5,7 +5,6 @@
 <body>
    <div>
     <a href="/">Homepage</a>
-    <a href="/user">User Profile</a>  
     <a href="/position">Position</a>
     <a href="/documents">Documents</a>
   </div>
@@ -22,6 +21,12 @@
   <h1>The Hunt</h1>
 
   <h2> Welcome Viola to the Hunt!</h2>
+
+<div class="container">
+{% for flash in get_flashed_messages() %}
+  <div class="alert alert-info">{{ flash }}</div>
+{% endfor %}
+</div>
 
  {% block body %}
 <img src="../static/img/ViolaSP2015.png" height="100" alt="User's profile picture" align="left">
