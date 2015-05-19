@@ -49,7 +49,7 @@ class Position(db.Model):
 
     def __repr__(self):
         """I'm adding this statement to make sure that my relationship is established"""
-        return "<Position position_id=%s title=%d user_asset_id=%s>" % (self.position_id, self.title, self.user_asset_id)
+        return "<Position position_id=%s title=%s user_asset_id=%s>" % (self.position_id, self.title, self.user_asset_id)
 
 
 class User_Assets(db.Model):

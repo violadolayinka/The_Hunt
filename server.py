@@ -33,19 +33,12 @@ def position_page():
 def position_form():
     """Process a user's position."""
     title = request.form["title"]
-    print title
     position_summary = request.form["position_summary"]
-    print position_summary
     deadline = request.form["deadline"]
-    print deadline
     company_name = request.form["company_name"]
-    print company_name
     location = request.form["location"]
-    print location
     application_status = request.form["status"]
-    print application_status
     position_url = request.form["position_url"]
-    print position_url
 
     new_position = Position(title=title, position_summary=position_summary, deadline=deadline, company_name=company_name, location=location, application_status=application_status, position_url=position_url)
 
@@ -54,6 +47,14 @@ def position_form():
 
     flash("Position %s added!" % title)
     return redirect('/')
+
+
+@app.route("/listofpositions")
+def position_list():
+    """Shows list of positions."""
+    positions = Position.query.all()
+    print positions
+    return render_template("position_list.html", positions=positions)
 
 
 @app.route('/documents')
