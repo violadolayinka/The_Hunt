@@ -1,7 +1,24 @@
 {% extends 'base.html' %}
 
 {% block body %}
-
-<div>Hi this is a test</div>  
+  <img src="../static/img/ViolaSP2015.png" height="100" alt="User's profile picture" align="left">
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <h4> Here are your active positions:</h4>
+  {% for position in positions %}
+    <ul>
+        <li>{{ position.title }} ({{ position.company_name }})</li>
+    </ul>
+  {% endfor %}
+  <h4> Here are the documents you have on file:</h4>
+  {% for document in documents %}
+    <ul>
+        <li>{{ document.asset_type }} ({{ document.asset_content }})</li>
+    </ul>
+  {% endfor %}
 
 {% endblock %}

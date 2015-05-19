@@ -5,35 +5,27 @@
 <body>
    <div>
     <a href="/">Homepage</a>
-    <a href="/position">Position</a>
-    <a href="/documents">Documents</a>
+    <a href="/position">Add a New Position</a>
+    <a href="/listofpositions"> Your Existing Positions</a>
+    <a href="/documents"> Add a New Document</a>
+    <a href="/listofdocuments"> Your Existing Documents</a>
   </div>
-  {% if "user_id" in session %}
-    <a href="/logout">Logout</a>
-{% else %}
-    <a href="/login">Login</a>
-{% endif %}
+  <div>
+    <img src="../static/img/the_hunt.jpg" height="300">
+  </div>
+    <h1>The Hunt</h1>
 
-<!-- ask about this and projecting the picture from your hardrive -->
-<div>
-  <img src="../static/img/the_hunt.jpg" height="300">
-</div>
-  <h1>The Hunt</h1>
+    <h2> Welcome Viola to the Hunt!</h2>
 
-  <h2> Welcome Viola to the Hunt!</h2>
+  <div class="container">
+  {% for flash in get_flashed_messages() %}
+    <div class="alert alert-info">{{ flash }}</div>
+  {% endfor %}
+  </div>
 
-<div class="container">
-{% for flash in get_flashed_messages() %}
-  <div class="alert alert-info">{{ flash }}</div>
-{% endfor %}
-</div>
-
- {% block body %}
-<img src="../static/img/ViolaSP2015.png" height="100" alt="User's profile picture" align="left">
-
-<h4> Here are your active positions!</h4>
-<h4> Here are the contacts you have on file</h4>
- {% endblock %}
+   {% block body %}
+  
+   {% endblock %}
 
 <footer>
    <p>Copyright The Hunt Viola D. Olayinka's HB Final Project 2015. All rights reserved.</p>
