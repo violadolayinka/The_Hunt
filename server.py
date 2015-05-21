@@ -5,7 +5,7 @@ from jinja2 import StrictUndefined
 from flask import Flask, render_template, request, flash, redirect, session
 from flask_debugtoolbar import DebugToolbarExtension
 
-from model import connect_to_db, db, User, Position, User_Assets, Notes
+from model import connect_to_db, db, User, Position, Documents, Notes
 
 
 app = Flask(__name__)
@@ -24,7 +24,7 @@ def index():
 def dashboard():
     """Dashboard."""
     positions = Position.query.all()
-    documents = User_Assets.query.all()
+    documents = Documents.query.all()
     notes = Notes.query.all()
     users = User.query.all()
     # user = User.query.all()
@@ -58,11 +58,10 @@ def register_process():
     db.session.add(new_user)
     db.session.commit()
 
-    #query for new user and add to flask sesssion, two seperate things  
+    #query for new user and add to flask sesssion, two seperate things
 
     flash("Thanks %s for joining the hunt!" % first_name)
     return redirect("/dashboard")
-  
 
 
 @app.route('/login', methods=['GET'])
@@ -103,11 +102,6 @@ def logout():
     flash("Logged Out. Thanks for using The Hunt!")
     return redirect("/")
 
-# @app.route('/user')
-# def user_page():
-#     """This page will display a user's details."""
-#     return render_template("user_detail.html")
-
 
 @app.route('/position')
 def position_page():
@@ -132,7 +126,7 @@ def position_form():
     db.session.commit()
 
     flash("Position %s added!" % title)
-    return redirect('/')
+    return redirect("/listofpositions")
 
 
 @app.route("/listofpositions")
@@ -163,22 +157,22 @@ def documents_page():
 @app.route('/submit_documents', methods=['POST'])
 def document_form():
     """Process a user's documents."""
-    asset_type = request.form["document_type"]
-    asset_content = request.form["document"]
+    document_type = request.form["document_type"]
+    document_content = request.form["document"]
 
-    new_document = User_Assets(asset_type=asset_type, asset_content=asset_content)
+    new_document = Documents(document_type=document_type, document_content=document_content)
 
     db.session.add(new_document)
     db.session.commit()
 
-    flash("Your %s has been added!" % asset_type)
-    return redirect('/')
+    flash("Your %s has been added!" % document_type)
+    return redirect('/documents')
 
 
 @app.route("/listofdocuments")
 def document_list():
     """Shows list of documents."""
-    documents = User_Assets.query.all()
+    documents = Documents.query.all()
     print documents
     return render_template("document_list.html", documents=documents)
 
@@ -186,14 +180,14 @@ def document_list():
 @app.route("/document/<int:user_asset_id>")
 def document(user_asset_id):
     """Shows info about a position."""
-    document = User_Assets.query.get(user_asset_id)
+    document = Documents.query.get(user_asset_id)
     print document
     return render_template("document.html", document=document)
 
 
 @app.route('/notes')
 def notes_page():
-    """This will show the a page for an user's positions."""
+    """This will show the a page for an user's notes."""
     return render_template("notes.html")
 
 
@@ -209,7 +203,7 @@ def note_form():
     db.session.commit()
 
     flash("Your %s has been added!" % note_type)
-    return redirect('/')
+    return redirect("/listofnotes")
 
 
 @app.route("/listofnotes")
