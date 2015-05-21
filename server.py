@@ -58,9 +58,11 @@ def register_process():
     db.session.add(new_user)
     db.session.commit()
 
+    #query for new user and add to flask sesssion, two seperate things  
+
     flash("Thanks %s for joining the hunt!" % first_name)
     return redirect("/dashboard")
-    # return "SUCCESS!!"
+  
 
 
 @app.route('/login', methods=['GET'])
@@ -90,7 +92,7 @@ def login_process():
     session["user_id"] = user.user_id
 
     flash("Logged in")
-    return redirect("/")
+    return redirect('/dashboard')
 
 
 @app.route('/logout')
@@ -98,7 +100,7 @@ def logout():
     """Log out."""
 
     del session["user_id"]
-    flash("Logged Out.")
+    flash("Logged Out. Thanks for using The Hunt!")
     return redirect("/")
 
 # @app.route('/user')
