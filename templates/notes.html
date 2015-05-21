@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h4>Keep track of your documents here!</h4>
+<form action="/submit_notes" method='POST'>
+  <label for="title" required> What type of note is this? </label>
+  <br>
+      <select name="note_type">
+      <option value="position_note">Postion Note</option>
+      <option value="asset_note">Asset Note</option>
+      </select>
+  <br>
+  <br>
+  <label for="note_details">Enter your notes here: </label><br>
+    <textarea name="note_details" rows="4" cols="50"></textarea>
+  <br>
+  <br>
+  <input type="submit">
+  </form>              
+
+{% endblock %}

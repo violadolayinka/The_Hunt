@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% block body %}
 
-  <h1>{{ document.asset_type }} </h1>
+  <h1>{{ note.note_type }} </h1>
 
-  <p>Details: {{ document.asset_content }}</p>
+  <p>Details: {{ note.note_details }}</p>
  
   
   <form action="/submit_notes" method="POST">
-  <label for="position_summary">Enter notes about this role here: </label><br>
+  <label for="position_summary">Update this note: </label><br>
     <textarea rows="4" cols="50"></textarea><br>
   <input type="submit">
   </form>  

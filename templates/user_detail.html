@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<h4>Add a new position!</h4>
+<form action="/submit_user" method='POST'>
+  <div>
+    <label for="name">What's your name? </label>
+    <input type="text" name="first_name" value="first_name"><input type="text" name="last_name" value="last_name">
+  </div>
+  <br>
+  <br>
+   <div>
+    <label for="picture">Upload a professional headshot here:</label>
+    <input type="text" name="picture" value="picture">
+  </div>
+  <br>
+  <br>
+  <div>
+    <label for="deadline">What's your email address?</label>
+      <input type="text" name="email_address" value="email">
+  </div>
+  <br>
+  <br>
+  <div>
+    <label for="ctypeompany_name">Company Name: </label>
+      <input ="text" name="company_name" value="company_name">
+  </div>
+  <br> 
+  <br> 
+  <div> 
+    <label for="location">Location: </label>
+      <input type="text" name="location" value="location">
+  </div>
+  <br> 
+  <br>
+  <div>
+    <label for="application_status">Application Status: </label>
+      <input type="radio" name="status" value="not_yet_started"> Not Yet Started?
+      <input type="radio" name="status" value="in_progress"> In Progress  
+      <input type="radio" name="status" value="complete"> Complete 
+      <input type="radio" name="status" value="rejected"> Rejected
+  </div>
+  <br> 
+  <br>
+  <div>
+    <label for="position_url">Position Url: </label>
+      <input type="text" name="position_url" value="position_url">
+  </div>
+  <br>
+  <br>
+  <div>
+    <label for="submit"></label>
+      <input type="submit">
+  </div>
+</form>
+
+{% endblock %}

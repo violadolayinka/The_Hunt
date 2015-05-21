@@ -14,6 +14,7 @@ class User(db.Model):
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     first_name = db.Column(db.String(100), nullable=False)
     last_name = db.Column(db.String(100), nullable=False)
+    password = db.Column(db.String(64), nullable=True)
     picture = db.Column(db.String(100))
     email_address = db.Column(db.String(100))
     last_login = db.Column(db.String(60))
@@ -62,8 +63,20 @@ class User_Assets(db.Model):
     asset_content = db.Column(db.String(3000))
 
 
+class Notes(db.Model):
+    """User's Notes."""
 
-    # position_id = db.Column(db.String(200), nullable=True)
+    __tablename__ = "notes"
+
+    note_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    note_type = db.Column(db.String(3000))
+    note_details = db.Column(db.String(3000))
+    position_id = db.Column(db.Integer, db.ForeignKey('position.position_id'))
+    user_asset_id = db.Column(db.Integer, db.ForeignKey('user_assets.user_asset_id'))
+
+    position_note = db.relationship("Position", backref=db.backref("notes", order_by=note_id))
+    # user_assets_ = db.relationship("User_Assets", backref=db.backref("position", order_by=position_id))
+
 # class Company(db.Model):
 #     """User's Bookmarked Companies."""
 
@@ -94,10 +107,6 @@ class User_Assets(db.Model):
 #     contact_linkedin_profile = db.Column(db.String(100))
 #     contact_type = db.Column(db.String(100))
 
-
-
-
-
 # class Interviews(db.Model):
 #     """User's Interviews"""
 
@@ -108,22 +117,6 @@ class User_Assets(db.Model):
 #     position_summary = db.Column(db.String(300))
 #     interview_type = db.Column(db.String(100))
 #     interview_status = db.Column(db.Integer)
-
-
-# class Notes(db.Model):
-#     """User's Position Notes."""
-
-#     __tablename__ = "Notes"
-
-#     notes_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-#     note = db.Column(db.String(3000))
-
-
-
-
-
-
-
 
 ##############################################################################
 # Helper functions

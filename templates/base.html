@@ -1,28 +1,34 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
    <title>The Hunt</title>
 </head>
 <body>
-   <div>
-    <a href="/">Homepage</a>
-    <a href="/position">Add a New Position</a>
-    <a href="/listofpositions"> Your Existing Positions</a>
-    <a href="/documents"> Add a New Document</a>
-    <a href="/listofdocuments"> Your Existing Documents</a>
-  </div>
-  <div>
-    <img src="../static/img/the_hunt.jpg" height="300">
-  </div>
-    <h1>The Hunt</h1>
-
-    <h2> Welcome Viola to the Hunt!</h2>
-
+  <nav>
+    <div>
+    <img src="../static/img/the_hunt.jpg" height="50" align="left">
+    </div>
+    <div>
+      {% for user in users %}
+        <a href='/dashboard'>{{ user.firstname }}Dashboard</a>
+        <a href='/login'>Login</a>
+        <a href='/logout'>Logout</a>
+        <a href="/position">Add a New Position</a>
+        <a href="/listofpositions"> {{ user.firstname }} Positions</a>
+        <a href="/documents"> Add a New Document</a>
+        <a href="/listofdocuments"> {{ user.firstname }} Documents</a>
+        <a href="/notes"> Add a New Note </a>
+        <a href="/listofnotes">{{ user.firstname }} Existing Notes </a>
+      {% endfor %}
+   </div>
+  </nav> 
   <div class="container">
   {% for flash in get_flashed_messages() %}
     <div class="alert alert-info">{{ flash }}</div>
   {% endfor %}
   </div>
-
+  <br>
+  <br>
    {% block body %}
   
    {% endblock %}
