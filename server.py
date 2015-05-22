@@ -23,45 +23,47 @@ def index():
 @app.route('/dashboard')
 def dashboard():
     """Dashboard."""
-    positions = Position.query.all()
-    documents = Documents.query.all()
-    notes = Notes.query.all()
-    users = User.query.all()
-    # user = User.query.all()
-    return render_template("dashboard.html", users=users, positions=positions, documents=documents, notes=notes)
+    my_user = session["user_id"]
+    user = User.query.filter_by(user_id=my_user).one()
+    positions = Position.query.filter_by(user_id=my_user).all()
+    return render_template("dashboard.html", user=user, positions=positions)
 
 
 @app.route('/register', methods=['GET'])
-def register_form():
+def registration():
     """Show form for user signup."""
 
     return render_template("register_form.html")
 
 
 @app.route('/submit_register', methods=['POST'])
-def register_process():
-    """Process registration."""
+def process_registration():
+    """Adds a new user to the database"""
 
-    first_name = request.form["first_name"]
-    last_name = request.form["last_name"]
-    password = request.form["password"]
-    picture = request.form["picture"]
-    email_address = request.form["email_address"]
-    last_login = "Login"
-    user_LinkedIn_url = request.form["linkedin_url"]
-    user_Twitter_url = request.form["twitter_url"]
-    user_Facebook_url = request.form["facebook_url"]
-    user_website_url = request.form["website_url"]
+    first_name = request.form.get("first_name")
+    last_name = request.form.get("last_name")
+    password = request.form.get("password")
+    picture = request.form.get("picture")
+    email_address = request.form.get("email_address")
+    linkedin_url = request.form.get("linkedin_url")
+    twitter_url = request.form.get("twitter_url")
+    facebook_url = request.form.get("facebook_url")
+    website_url = request.form.get("website_url")
 
-    new_user = User(first_name=first_name, last_name=last_name, last_login=last_login, password=password, picture=picture, email_address=email_address, user_LinkedIn_url=user_LinkedIn_url, user_Twitter_url=user_Twitter_url, user_Facebook_url=user_Facebook_url, user_website_url=user_website_url)
+    new_user = User.query.filter_by(email_address=email_address).first()
+    if new_user:  #if the user's email already exists on file
+        flash("This email address is already on file. Please log in!")
+        return redirect('/login')
+    else:
+        new_user = User(first_name=first_name, last_name=last_name, password=password, picture=picture, email_address=email_address, linkedin_url=linkedin_url, twitter_url=twitter_url, facebook_url=facebook_url, website_url=website_url)
 
     db.session.add(new_user)
     db.session.commit()
 
-    #query for new user and add to flask sesssion, two seperate things
+    session["new_user"] = first_name
 
-    flash("Thanks %s for joining the hunt!" % first_name)
-    return redirect("/dashboard")
+    flash("Thanks %s for joining the hunt!" % session["new_user"])
+    return redirect('/login')
 
 
 @app.route('/login', methods=['GET'])
@@ -75,13 +77,12 @@ def login_form():
 def login_process():
     """Process login."""
 
-    email_address = request.form["email"]
-    password = request.form["password"]
+    email_address = request.form.get("email")
+    password = request.form.get("password")
 
     user = User.query.filter_by(email_address=email_address).first()
 
     if not user:
-        flash("No such user")
         return redirect('/login')
 
     if user.password != password:
@@ -99,6 +100,7 @@ def logout():
     """Log out."""
 
     del session["user_id"]
+
     flash("Logged Out. Thanks for using The Hunt!")
     return redirect("/")
 
@@ -134,9 +136,10 @@ def position_list():
     """Shows list of positions."""
     #I need to add code here that prompts a user to upload new positions
     #if there are no positions listed
-
-    positions = Position.query.all()
-    print positions
+    u = session["user_id"]
+    my_user = User.query.filter_by(user_id=u).one()
+    print my_user
+    positions = my_user.positions
     return render_template("position_list.html", positions=positions)
 
 

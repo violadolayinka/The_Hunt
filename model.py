@@ -18,10 +18,10 @@ class User(db.Model):
     password = db.Column(db.String(64), nullable=True)
     picture = db.Column(db.String(100))
     email_address = db.Column(db.String(100))
-    user_LinkedIn_url = db.Column(db.String(100))
-    user_Twitter_url = db.Column(db.String(100))
-    user_Facebook_url = db.Column(db.String(100))
-    user_website_url = db.Column(db.String(100))
+    linkedin_url = db.Column(db.String(100))
+    twitter_url = db.Column(db.String(100))
+    facebook_url = db.Column(db.String(100))
+    website_url = db.Column(db.String(100))
 
     def __repr__(self):
         """This will provide helpful information when printed."""
@@ -36,6 +36,7 @@ class Position(db.Model):
     position_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     document_id = db.Column(db.Integer, db.ForeignKey('documents.document_id'))
     note_id = db.Column(db.Integer, db.ForeignKey('notes.note_id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
     title = db.Column(db.String(50))
     position_summary = db.Column(db.String(300))
     deadline = db.Column(db.DateTime)
@@ -45,13 +46,13 @@ class Position(db.Model):
     position_url = db.Column(db.String(100))
 
     document = db.relationship("Documents", backref=db.backref("positions", order_by=position_id))
-
+    user = db.relationship("User", backref=db.backref("positions", order_by=position_id))
     note = db.relationship("Notes", backref=db.backref("positions", order_by=position_id))
 
     def __repr__(self):
         """Provide helpful representation when printed."""
         deadline = self.deadline.strftime("%m/%d/%Y")
-        return "<Positions position_id=%s title=%s document_id=%s note_id=%s deadline=%s>" % (self.position_id, self.title, self.document_id, self.note_id, deadline)
+        return "<Positions position_id=%s title=%s document_id=%s note_id=%s user_id=%s deadline=%s>" % (self.position_id, self.title, self.document_id, self.note_id, self.user_id, deadline)
 
 
 class Documents(db.Model):

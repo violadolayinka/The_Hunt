@@ -2,7 +2,7 @@
 
 {% block body %}
 
-  <h2> Welcome Viola to the Hunt!</h2> 
+  <h2> Welcome {{user.first_name}} to The Hunt!</h2> 
   <img src="../static/img/ViolaSP2015.png" height="100" alt="User's profile picture" align="left">
   <br>
   <br>
@@ -17,18 +17,8 @@
         <li><a href="/position/{{position.position_id}}">{{ position.title }} ({{ position.company_name }}) </a><br><strong>Next Deadline:</strong><br>{{ position.deadline }} </li>
     </ul>
   {% endfor %}
-  <h3> Here are the documents you have on file:</h3>
-  {% for document in documents %}
-    <ul>
-        <li>{{ document.asset_type }} ({{ document.asset_content }})</li>
-    </ul>
-  {% endfor %}
-   <h3> Things to do:</h3>
-   {% for note in notes %}
-    <ul>
-        <li>{{ note.note_type }}</li>
-    </ul>
-  {% endfor %}
+  <form action='/position'>
+    <input type="submit" value="Add a new position here!">
+  </form>
  
-
 {% endblock %}

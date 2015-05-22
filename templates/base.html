@@ -9,17 +9,12 @@
     <img src="../static/img/the_hunt.jpg" height="50" align="left">
     </div>
     <div>
-      {% for user in users %}
-        <a href='/dashboard'>{{ user.firstname }}Dashboard</a>
-        <a href='/login'>Login</a>
-        <a href='/logout'>Logout</a>
+        <a href='/dashboard'>Dashboard</a>
         <a href="/position">Add a New Position</a>
-        <a href="/listofpositions"> {{ user.firstname }} Positions</a>
+        <a href="/listofpositions"> Positions</a>
         <a href="/documents"> Add a New Document</a>
-        <a href="/listofdocuments"> {{ user.firstname }} Documents</a>
-        <a href="/notes"> Add a New Note </a>
-        <a href="/listofnotes">{{ user.firstname }} Existing Notes </a>
-      {% endfor %}
+        <a href="/listofdocuments">Documents</a>
+        <a href='/logout'> Log Out </a>
    </div>
   </nav> 
   <div class="container">
