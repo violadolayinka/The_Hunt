@@ -34,9 +34,7 @@ class Position(db.Model):
     __tablename__ = "positions"
 
     position_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    document_id = db.Column(db.Integer, db.ForeignKey('documents.document_id'))
-    note_id = db.Column(db.Integer, db.ForeignKey('notes.note_id'))
-    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
     title = db.Column(db.String(50))
     position_summary = db.Column(db.String(300))
     deadline = db.Column(db.DateTime)
@@ -45,14 +43,11 @@ class Position(db.Model):
     application_status = db.Column(db.String(50))
     position_url = db.Column(db.String(100))
 
-    document = db.relationship("Documents", backref=db.backref("positions", order_by=position_id))
     user = db.relationship("User", backref=db.backref("positions", order_by=position_id))
-    note = db.relationship("Notes", backref=db.backref("positions", order_by=position_id))
 
     def __repr__(self):
         """Provide helpful representation when printed."""
-        deadline = self.deadline.strftime("%m/%d/%Y")
-        return "<Positions position_id=%s title=%s document_id=%s note_id=%s user_id=%s deadline=%s>" % (self.position_id, self.title, self.document_id, self.note_id, self.user_id, deadline)
+        return "<Positions position_id=%s title=%s user_id=%s deadline=%s>" % (self.position_id, self.title, self.user_id, self.deadline)
 
 
 class Documents(db.Model):
@@ -61,8 +56,11 @@ class Documents(db.Model):
     __tablename__ = "documents"
 
     document_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    position_id = db.Column(db.Integer, db.ForeignKey('positions.position_id'), nullable=False)
     document_type = db.Column(db.String(100))
     document_content = db.Column(db.String(3000))
+
+    position = db.relationship("Position", backref=db.backref("documents", order_by=document_id))
 
 
 class Notes(db.Model):
@@ -71,8 +69,11 @@ class Notes(db.Model):
     __tablename__ = "notes"
 
     note_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    note_type = db.Column(db.String(3000))
+    position_id = db.Column(db.Integer, db.ForeignKey('positions.position_id'), nullable=False)
     note_details = db.Column(db.String(3000))
+
+    position = db.relationship("Position", backref=db.backref("notes", order_by=note_id))
+
 ##############################################################################
 # Helper functions
 

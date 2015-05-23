@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block body %}
 
-  <h1>{{ document.asset_type }} </h1>
+  <h1>{{ document.document_type }} </h1>
 
-  <p>Details: {{ document.asset_content }}</p>
+  <p>Details: {{ document.document_content }}</p>
  
   
   <form action="/submit_notes" method="POST">

@@ -1,15 +1,8 @@
 {% extends 'base.html' %}
 {% block body %}
 
-  <h1>{{ note.note_type }} </h1>
+  <h1>Notes</h1>
 
-  <p>Details: {{ note.note_details }}</p>
- 
-  
-  <form action="/submit_notes" method="POST">
-  <label for="position_summary">Update this note: </label><br>
-    <textarea rows="4" cols="50"></textarea><br>
-  <input type="submit">
-  </form>  
+  <p>Details: {{ notes.note_details }}</p> 
 
 {% endblock %}

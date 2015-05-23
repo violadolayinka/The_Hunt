@@ -1,6 +1,8 @@
 """HB Spring 2015 Final project."""
 
 from jinja2 import StrictUndefined
+from datetime import datetime
+
 
 from flask import Flask, render_template, request, flash, redirect, session
 from flask_debugtoolbar import DebugToolbarExtension
@@ -114,6 +116,7 @@ def position_page():
 @app.route('/submit_position', methods=['POST'])
 def position_form():
     """Process a user's position."""
+    u = session["user_id"]
     title = request.form["title"]
     position_summary = request.form["position_summary"]
     deadline = request.form["deadline"]
@@ -122,12 +125,14 @@ def position_form():
     application_status = request.form["status"]
     position_url = request.form["position_url"]
 
-    new_position = Position(title=title, position_summary=position_summary, deadline=deadline, company_name=company_name, location=location, application_status=application_status, position_url=position_url)
+    new_deadline = datetime.strptime(deadline, "%Y-%m-%d")
+
+    new_position = Position(user_id=u, title=title, position_summary=position_summary, deadline=new_deadline, company_name=company_name, location=location, application_status=application_status, position_url=position_url)
 
     db.session.add(new_position)
     db.session.commit()
 
-    flash("Position %s added!" % title)
+    flash("Position: %s  added!" % title)
     return redirect("/listofpositions")
 
 
@@ -137,92 +142,81 @@ def position_list():
     #I need to add code here that prompts a user to upload new positions
     #if there are no positions listed
     u = session["user_id"]
-    my_user = User.query.filter_by(user_id=u).one()
-    print my_user
-    positions = my_user.positions
+    positions = Position.query.filter_by(user_id=u).all()
     return render_template("position_list.html", positions=positions)
 
 
 @app.route("/position/<int:position_id>")
 def position(position_id):
     """Shows info about a position."""
-    position = Position.query.get(position_id)
+    session["position_id"] = position_id
+    position = Position.query.filter_by(position_id=position_id).one()
     print position
     return render_template("position.html", position=position)
 
 
 @app.route('/documents')
 def documents_page():
-    """This will show the a page for an user's positions."""
+    """This will show the a page for an user's documents."""
     return render_template("documents.html")
 
 
 @app.route('/submit_documents', methods=['POST'])
 def document_form():
     """Process a user's documents."""
+    position_id = session.get("position_id")
     document_type = request.form["document_type"]
     document_content = request.form["document"]
+    note_details = request.form["note_details"]
 
-    new_document = Documents(document_type=document_type, document_content=document_content)
-
+    new_document = Documents(position_id=position_id, document_type=document_type, document_content=document_content)
+    new_note = Notes(position_id=position_id, note_details=note_details)
     db.session.add(new_document)
+    db.session.add(new_note)
     db.session.commit()
 
     flash("Your %s has been added!" % document_type)
-    return redirect('/documents')
+    return redirect('/dashboard')
 
 
 @app.route("/listofdocuments")
 def document_list():
     """Shows list of documents."""
-    documents = Documents.query.all()
+    u_id = session["user_id"]
+    user_object = User.query.get(u_id)
+
+    documents = []
+
+    for position in user_object.positions:
+        documents.extend(position.documents)
+
     print documents
     return render_template("document_list.html", documents=documents)
 
 
-@app.route("/document/<int:user_asset_id>")
-def document(user_asset_id):
+@app.route("/document/<int:document_id>")
+def document(document_id):
     """Shows info about a position."""
-    document = Documents.query.get(user_asset_id)
-    print document
+    document = Documents.query.get(document_id)
     return render_template("document.html", document=document)
-
-
-@app.route('/notes')
-def notes_page():
-    """This will show the a page for an user's notes."""
-    return render_template("notes.html")
-
-
-@app.route('/submit_notes', methods=['POST'])
-def note_form():
-    """Process a user's notes."""
-    note_type = request.form["note_type"]
-    note_details = request.form["note_details"]
-
-    new_note = Notes(note_type=note_type, note_details=note_details)
-
-    db.session.add(new_note)
-    db.session.commit()
-
-    flash("Your %s has been added!" % note_type)
-    return redirect("/listofnotes")
 
 
 @app.route("/listofnotes")
 def note_list():
     """Shows list of notes."""
-    notes = Notes.query.all()
+    u_id = session["user_id"]
+    position_object = Position.query.get(u_id)
+    print "LOOK HERE"
+    print position_object
+
+    notes = []
+
+    for note in position_object:
+        notes.extend(position.notes)
     print notes
     return render_template("note_list.html", notes=notes)
 
 
-@app.route("/notes/<int:note_id>")
-def note(note_id):
-    """Shows info about a note."""
-    note = Notes.query.get(note_id)
-    print note
-    return render_template("note.html", note=note)
 
 
 if __name__ == "__main__":

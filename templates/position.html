@@ -1,16 +1,17 @@
 {% extends 'base.html' %}
 {% block body %}
 
-  <h3>{{ position.title }} ({{ position.company_name }})</h3>
 
-  <p><strong>Deadline:</strong> {{ position.deadline }}</p>
-  <p><strong>Location:</strong> {{ position.location }}</p>
-  <p><strong>Application Status:</strong> {{ position.application_status }}</p>
-  <p><strong>Position Summary:</strong> <br>{{ position.position_summary }}</p>
-  <p><strong>Position Url:</strong><br> <a href="{{ position.position_url }}" target="_blank">{{ position.position_url }}</a></p>
-  
+    <h3>{{ position.title }} ({{ position.company_name }})</h3>
+
+    <p><strong>Deadline:</strong> {{ position.deadline }}</p>
+    <p><strong>Location:</strong> {{ position.location }}</p>
+    <p><strong>Application Status:</strong> {{ position.application_status }}</p>
+    <p><strong>Position Summary:</strong> <br>{{ position.position_summary }}</p>
+    <p><strong>Position Url:</strong><br> <a href="{{ position.position_url }}" target="_blank">{{ position.position_url }}</a></p>
+ 
   <h3>Upload your documents for this role here!</h3>
-  <form action="/submit_documents" method='POST'>
+  <form action='/submit_documents' method='POST'>
   <label for="title" required> What type of document is this? </label>
   <br>
       <select name="document_type">
@@ -22,13 +23,17 @@
   <br>
   <br>
    <label for="document">Enter document text here: </label><br>
-    <textarea name="document" rows="4" cols="50"></textarea>
+    <textarea name="document" rows="4" cols="50"></textarea><br>
+    <label for="note_details">Enter your notes about this role here: </label><br>
+    <textarea name="note_details" rows="4" cols="50"></textarea><br>
+    <input type="submit">
+  </form>  
   <br>
   <br> 
-  <form action="/submit_notes" method='POST'>
+  <!-- <form action='/submit_notes' method='POST'>
   <label for="note_details">Enter your notes about this role here: </label><br>
     <textarea name="note_details" rows="4" cols="50"></textarea><br>
   <input type="submit">
-  </form>  
+  </form>   -->
 
 {% endblock %}

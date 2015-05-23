@@ -5,8 +5,8 @@
     <ul>
       {% for document in documents %}
           <li>
-              <a href="/document/{{ document.user_asset_id }}">
-                {{ document.asset_type }} ({{ document.asset_content }})
+              <a href="/document/{{ document.document_id}}">
+                {{ document.document_type }} ({{ document.document_content }})
               </a>
           </li>
       {% endfor %}
