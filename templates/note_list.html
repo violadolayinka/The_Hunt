@@ -5,9 +5,7 @@
     <ul>
       {% for note in notes %}
           <li>
-              <a href="/notes/{{ note.note_id }}">
-                {{ note.note_type }}
-              </a>
+            {{ note.note_details }}
           </li>
       {% endfor %}
     </ul>

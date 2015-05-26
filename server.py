@@ -25,10 +25,14 @@ def index():
 @app.route('/dashboard')
 def dashboard():
     """Dashboard."""
-    my_user = session["user_id"]
-    user = User.query.filter_by(user_id=my_user).one()
-    positions = Position.query.filter_by(user_id=my_user).all()
-    return render_template("dashboard.html", user=user, positions=positions)
+    if "user" in session:
+        my_user = session["user_id"]
+        user = User.query.filter_by(user_id=my_user).one()
+        positions = Position.query.filter_by(user_id=my_user).all()
+        return render_template("dashboard.html", user=user, positions=positions)
+    else:
+        flash("Please log into  The Hunt!")
+        return redirect('/')
 
 
 @app.route('/register', methods=['GET'])
@@ -85,6 +89,7 @@ def login_process():
     user = User.query.filter_by(email_address=email_address).first()
 
     if not user:
+        flash("Please try again!")
         return redirect('/login')
 
     if user.password != password:
@@ -206,17 +211,10 @@ def note_list():
     """Shows list of notes."""
     u_id = session["user_id"]
     position_object = Position.query.get(u_id)
-    print "LOOK HERE"
-    print position_object
+    pos_id = position_object.position_id
+    notes = Notes.query.filter_by(position_id=pos_id).all()
 
-    notes = []
-
-    for note in position_object:
-        notes.extend(position.notes)
-    print notes
     return render_template("note_list.html", notes=notes)
-
-
 
 
 if __name__ == "__main__":
