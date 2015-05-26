@@ -29,7 +29,25 @@
     <input type="submit">
   </form>  
   <br>
-  <br> 
+  <h3>Documents for {{ position.title }} ({{ position.company_name }})</h3>
+    <ul>
+      {% for document in document %}
+          <li>
+              <a href="/document/{{ document.document_id}}">
+                {{ document.document_type }} ({{ document.document_content }})
+              </a>
+          </li>
+      {% endfor %}
+    </ul>
+  <br>
+  <h3>Notes on {{ position.title }} ({{ position.company_name }})</h3>
+    <ul>
+      {% for note in notes %}
+          <li>
+            {{ note.note_details }}
+          </li>
+      {% endfor %}
+    </ul>
   <!-- <form action='/submit_notes' method='POST'>
   <label for="note_details">Enter your notes about this role here: </label><br>
     <textarea name="note_details" rows="4" cols="50"></textarea><br>

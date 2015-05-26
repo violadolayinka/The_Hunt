@@ -1,19 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-   <title>The Hunt</title>
-</head>
-<body>
-    <h1 align="center">The Hunt</h1>
-    <div align="center"><img src="../static/img/the_hunt.jpg" width="600"></div>
-    <br><br>
-    <div align="center"><a href='/login'>Login</a>  <a href='/register'>Register</a></div>
+{% extends 'base.html' %}
 
-<div align="center">
-<footer>
-   <p>Copyright The Hunt Viola D. Olayinka's HB Final Project 2015. <br>All rights reserved.</p>
-</footer>
-</div>
+{% block nav %}
+<!-- THIS IS OVERRIDING THE NAVIGATION BAR FROM THE BASE.HTML -->
+{% endblock %}
 
-</body>
-</html>
+
+{% block body %}
+<h1 align="center">The Hunt</h1>
+<div align="center"><img src="../static/img/the_hunt.jpg" width="600"></div>
+<br><br>
+<div align="center"><a href='/login'>Login</a>  <a href='/register'>Register</a></div>
+{% endblock %}

@@ -4,6 +4,7 @@
    <title>The Hunt</title>
 </head>
 <body>
+{% block nav %}
   <nav>
     <div>
     <img src="../static/img/the_hunt.jpg" height="50" align="left">
@@ -17,10 +18,13 @@
         <a href='/logout'> Log Out </a>
    </div>
   </nav> 
+{% endblock %}
   <div class="container">
-  {% for flash in get_flashed_messages() %}
-    <div class="alert alert-info">{{ flash }}</div>
-  {% endfor %}
+  {% with messages = get_flashed_messages() %}
+      {% for message in messages %}
+          <div style="background-color: yellow" class="alert alert-info">{{ message }}</div>
+      {% endfor %}
+  {% endwith %}
   </div>
   <br>
   <br>
@@ -28,9 +32,11 @@
   
    {% endblock %}
 
-<footer>
+<div align="center">
+  <footer>
    <p>Copyright The Hunt Viola D. Olayinka's HB Final Project 2015. All rights reserved.</p>
-</footer>
+  </footer>
+</div>
 
 </body>
 </html>

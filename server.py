@@ -25,7 +25,8 @@ def index():
 @app.route('/dashboard')
 def dashboard():
     """Dashboard."""
-    if "user" in session:
+    print "MADE IT TO DASHBOARD"
+    if "user_id" in session:
         my_user = session["user_id"]
         user = User.query.filter_by(user_id=my_user).one()
         positions = Position.query.filter_by(user_id=my_user).all()
@@ -156,8 +157,10 @@ def position(position_id):
     """Shows info about a position."""
     session["position_id"] = position_id
     position = Position.query.filter_by(position_id=position_id).one()
+    notes = Notes.query.filter_by(position_id=position_id).all()
+    document = Documents.query.filter_by(position_id=position_id).all()
     print position
-    return render_template("position.html", position=position)
+    return render_template("position.html", position=position, notes=notes, document=document)
 
 
 @app.route('/documents')
