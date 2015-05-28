@@ -7,11 +7,23 @@
     <p><strong>Deadline:</strong> {{ position.deadline }}</p>
     <p><strong>Location:</strong> {{ position.location }}</p>
     <p><strong>Application Status:</strong> {{ position.application_status }}</p>
+    <p><strong>Have you made progress on this application? Update your status here:</strong></p>
+       <form action="/position/{{position.position_id}}" method='POST'>
+          <label for="application_status"><strong>Updated Application Status:</strong></label>
+          <input type="radio" name="status" value="not_yet_started"> Not Yet Started?
+          <input type="radio" name="status" value="in_progress"> In Progress  
+          <input type="radio" name="status" value="complete"> Complete 
+          <input type="radio" name="status" value="rejected"> Rejected
+          </label>
+          <button type="submit">Submit</button>
+        </form>
+
     <p><strong>Position Summary:</strong> <br>{{ position.position_summary }}</p>
     <p><strong>Position Url:</strong><br> <a href="{{ position.position_url }}" target="_blank">{{ position.position_url }}</a></p>
  
   <h3>Upload your documents for this role here!</h3>
   <form action='/submit_documents' method='POST'>
+    <input type="hidden" name="position_id" value="{{position.position_id}}">
   <label for="title" required> What type of document is this? </label>
   <br>
       <select name="document_type">
@@ -34,7 +46,7 @@
       {% for document in document %}
           <li>
               <a href="/document/{{ document.document_id}}">
-                {{ document.document_type }} ({{ document.document_content }})
+                {{ document.document_type }})
               </a>
           </li>
       {% endfor %}

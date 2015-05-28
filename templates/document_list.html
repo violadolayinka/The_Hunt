@@ -6,7 +6,7 @@
       {% for document in documents %}
           <li>
               <a href="/document/{{ document.document_id}}">
-                {{ document.document_type }} ({{ document.document_content }})
+                {{ document.document_type }} ({{ position.company_name }})
               </a>
           </li>
       {% endfor %}
