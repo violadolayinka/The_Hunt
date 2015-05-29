@@ -2,11 +2,10 @@
 
 from jinja2 import StrictUndefined
 from datetime import datetime
-from wtforms import Form, BooleanField, StringField, validators
-
+# from wtforms import Form, BooleanField, StringField, validators
 
 from flask import Flask, render_template, request, flash, redirect, session
-from flask_debugtoolbar import DebugToolbarExtension
+# from flask_debugtoolbar import DebugToolbarExtension
 
 from model import connect_to_db, db, User, Position, Documents, Notes
 
@@ -16,6 +15,7 @@ app = Flask(__name__)
 app.secret_key = "ABC"
 
 app.jinja_env.undefined = StrictUndefined
+
 
 @app.route('/')
 def index():
@@ -54,9 +54,9 @@ def process_registration():
     twitter_url = request.form.get("twitter_url")
     facebook_url = request.form.get("facebook_url")
     website_url = request.form.get("website_url")
-
+#if the user's email already exists on file
     preexisting_user = User.query.filter_by(email_address=email_address).first()
-    if preexisting_user:  #if the user's email already exists on file
+    if preexisting_user:
         flash("This email address is already on file. Please log in!")
         return redirect('/login')
 
@@ -126,6 +126,10 @@ def position_page():
 def position_form():
     """Process a user's position."""
     # FIXME check for logged in user like in above
+    # if "user_id" in session:
+    #     my_user_id = session["user_id"]
+    #     user_id = User.query.filter_by(user_id=my_user_id).one()
+
     u = session["user_id"]
     title = request.form["title"]
     position_summary = request.form["position_summary"]
@@ -148,6 +152,10 @@ def position_form():
     flash("Position: %s  added!" % title)
     return redirect("/listofpositions")
 
+# else:
+#     flash("Please log into  The Hunt!")
+#     return redirect('/')
+
 
 @app.route("/listofpositions")
 def position_list():
@@ -166,9 +174,19 @@ def position(position_id):
     """Shows info about a position."""
     #FIXME maybe, make sure the user owns these positions
     if "user_id" in session:
-        #if we're logged in:
-
+        # my_user_id = session["user_id"]
+        # user = User.query.filter_by(user_id=my_user_id).one()
         position = Position.query.filter_by(position_id=position_id).one()
+        print "Here's the user currently in session"
+        # print "This is the userID", user.user_id
+        print "This is the position userid", position.user_id
+
+        if session['user_id'] != position.user_id:
+            flash("Whoops! You may have accessed the wrong page!")
+            return redirect('/dashboard')
+
+        # user_id = User.query.filter_by(user_id=my_user_id).one()
+        # position = Position.query.filter_by(position_id=position_id).one()
         notes = Notes.query.filter_by(position_id=position_id).all()
         document = Documents.query.filter_by(position_id=position_id).all()
 
@@ -178,7 +196,7 @@ def position(position_id):
             db.session.commit()
             flash("Your application status is updated!")
 
-        return render_template("position.html", position=position, notes=notes, document=document)
+        return render_template("position.html", user_id=session['user_id'], position=position, notes=notes, document=document)
     else:
 
         flash("Please log into  The Hunt!")
@@ -189,12 +207,21 @@ def position(position_id):
 def documents_page():
     """This will show the a page for an user's documents."""
     if "user_id" in session:
-        u = session["user_id"]
-        #TODO check if we use user_id?
-        return render_template("documents.html", user_id=u)
+        my_user_id = session["user_id"]
+        user = User.query.filter_by(user_id=my_user_id).one()
+        positions = Position.query.filter_by(user_id=my_user_id).all()
+        return render_template("documents.html", user=user, positions=positions)
     else:
         flash("Please log into  The Hunt!")
         return redirect('/')
+
+    # if "user_id" in session:
+    #     u = session["user_id"]
+    #     #TODO check if we use user_id?
+    #     return render_template("documents.html", user_id=u)
+    # else:
+    #     flash("Please log into  The Hunt!")
+    #     return redirect('/')
 
 
 @app.route('/submit_documents', methods=['POST'])
@@ -241,6 +268,7 @@ def document_list():
 def document(document_id):
     #FIXME check for login
     """Shows info about a position."""
+
     document = Documents.query.get(document_id)
     return render_template("document.html", document=document)
 
@@ -248,8 +276,19 @@ def document(document_id):
 @app.route("/listofnotes")
 def note_list():
     """Shows list of notes."""
+    # if "user_id" in session:
+    #     my_user_id = session["user_id"]
+    #     user = User.query.filter_by(user_id=my_user_id).one()
+    #     positions = Position.query.filter_by(user_id=my_user_id).all()
+    #     return render_template("dashboard.html", user=user, positions=positions)
+    # else:
+    #     flash("Please log into  The Hunt!")
+    #     return redirect('/')
+
     #FIXME check for login
     u_id = session["user_id"]
+    print u_id
+    print type(u_id)
     position_object = Position.query.get(u_id)
     pos_id = position_object.position_id
     notes = Notes.query.filter_by(position_id=pos_id).all()
