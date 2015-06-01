@@ -6,8 +6,28 @@
 
 
 {% block body %}
-<h1 align="center">The Hunt</h1>
-<div align="center"><img src="../static/img/the_hunt.jpg" width="600"></div>
+<div class="wrap">
+    <p class="form-title">The Hunt</p>
+<!-- <h1 align="center">The Hunt</h1>
+ -->
+ <!-- <div align="center"><img src="../static/img/the_hunt.jpg" width="600"></div> -->
 <br><br>
-<div align="center"><a href='/login'>Login</a>  <a href='/register'>Register</a></div>
+<div class="container" align="center">
+    <div class="col-md-12">
+        <div class="pr-wrap">
+            <div class="pass-reset">
+                <form action="/login" method="POST">
+                    <label> Please enter your email:
+                        <input type="email" name="email" placeholder="Email">
+                    </label>
+                    <label>Password:
+                        <input type="password" name="password" placeholder="Password" required>
+                    </label>
+                    <input type="submit" value="Submit" class="pass-reset-submit btn btn-success btn-sm" />
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+ <a href='/register'>Register</a></div>
 {% endblock %}

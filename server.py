@@ -2,11 +2,8 @@
 
 from jinja2 import StrictUndefined
 from datetime import datetime
-# from wtforms import Form, BooleanField, StringField, validators
-
 from flask import Flask, render_template, request, flash, redirect, session
-# from flask_debugtoolbar import DebugToolbarExtension
-
+from flask_debugtoolbar import DebugToolbarExtension
 from model import connect_to_db, db, User, Position, Documents, Notes
 
 
@@ -20,6 +17,28 @@ app.jinja_env.undefined = StrictUndefined
 @app.route('/')
 def index():
     return render_template("welcomepage.html")
+
+
+@app.route('/login', methods=['POST'])
+def login_process():
+    """Process login."""
+    email_address = request.form.get("email")
+    password = request.form.get("password")
+
+    user = User.query.filter_by(email_address=email_address).first()
+
+    if not user:
+        flash("Please try again!")
+        return redirect('/')
+
+    if user.password != password:
+        flash("Incorrect password")
+        return redirect('/')
+
+    session["user_id"] = user.user_id
+
+    flash("Logged in")
+    return redirect('/dashboard')
 
 
 @app.route('/dashboard')
@@ -58,7 +77,7 @@ def process_registration():
     preexisting_user = User.query.filter_by(email_address=email_address).first()
     if preexisting_user:
         flash("This email address is already on file. Please log in!")
-        return redirect('/login')
+        return redirect('/')
 
     new_user = User(first_name=first_name, last_name=last_name, password=password,
                     picture=picture, email_address=email_address, linkedin_url=linkedin_url,
@@ -69,35 +88,35 @@ def process_registration():
     db.session.commit()
 
     flash("Thanks %s for joining the hunt!" % first_name)
-    return redirect('/login')
+    return redirect('/')
 
 
-@app.route('/login')
-def login_form():
-    """Show login form."""
-    return render_template("login_form.html")
+# @app.route('/login')
+# def login_form():
+#     """Show login form."""
+#     return render_template("login_form.html")
 
 
-@app.route('/login', methods=['POST'])
-def login_process():
-    """Process login."""
-    email_address = request.form.get("email")
-    password = request.form.get("password")
+# @app.route('/login', methods=['POST'])
+# def login_process():
+#     """Process login."""
+#     email_address = request.form.get("email")
+#     password = request.form.get("password")
 
-    user = User.query.filter_by(email_address=email_address).first()
+#     user = User.query.filter_by(email_address=email_address).first()
 
-    if not user:
-        flash("Please try again!")
-        return redirect('/login')
+#     if not user:
+#         flash("Please try again!")
+#         return redirect('/login')
 
-    if user.password != password:
-        flash("Incorrect password")
-        return redirect('/login')
+#     if user.password != password:
+#         flash("Incorrect password")
+#         return redirect('/login')
 
-    session["user_id"] = user.user_id
+#     session["user_id"] = user.user_id
 
-    flash("Logged in")
-    return redirect('/dashboard')
+#     flash("Logged in")
+#     return redirect('/dashboard')
 
 
 @app.route('/logout')
@@ -174,8 +193,6 @@ def position(position_id):
     """Shows info about a position."""
     #FIXME maybe, make sure the user owns these positions
     if "user_id" in session:
-        # my_user_id = session["user_id"]
-        # user = User.query.filter_by(user_id=my_user_id).one()
         position = Position.query.filter_by(position_id=position_id).one()
         print "Here's the user currently in session"
         # print "This is the userID", user.user_id
@@ -185,8 +202,6 @@ def position(position_id):
             flash("Whoops! You may have accessed the wrong page!")
             return redirect('/dashboard')
 
-        # user_id = User.query.filter_by(user_id=my_user_id).one()
-        # position = Position.query.filter_by(position_id=position_id).one()
         notes = Notes.query.filter_by(position_id=position_id).all()
         document = Documents.query.filter_by(position_id=position_id).all()
 
@@ -203,14 +218,21 @@ def position(position_id):
         return redirect('/')
 
 
+@app.route('/delete_position')
+def delete_position():
+    """This route deletes a position."""
+    del session["user_id"]
+
+    flash("Logged Out. Thanks for using The Hunt!")
+    return redirect("/")
+
+
 @app.route('/documents')
 def documents_page():
     """This will show the a page for an user's documents."""
     if "user_id" in session:
-        my_user_id = session["user_id"]
-        user = User.query.filter_by(user_id=my_user_id).one()
         positions = Position.query.filter_by(user_id=my_user_id).all()
-        return render_template("documents.html", user=user, positions=positions)
+        return render_template("documents.html", user=session['user_id'], positions=positions)
     else:
         flash("Please log into  The Hunt!")
         return redirect('/')
@@ -304,6 +326,6 @@ if __name__ == "__main__":
     connect_to_db(app)
 
     # Use the DebugToolbar
-    # DebugToolbarExtension(app)
+    DebugToolbarExtension(app)
 
     app.run()

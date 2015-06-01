@@ -4,7 +4,25 @@
 <!-- THIS IS OVERRIDING THE NAVIGATION BAR FROM THE BASE.HTML -->
 {% endblock %}
 {% block body %}
-    <div align="center">
+<div class="container" align="center">
+    <div class="col-md-12">
+        <div class="pr-wrap">
+            <div class="pass-reset">
+                <form action='/login' method="POST">
+                    <label> Please enter your email:
+                        <input type="email" name="email" placeholder="Email">
+                    </label>
+                    <label>Password:
+                        <input type="password" name="password" placeholder="Password" required>
+                    </label>
+                    <input type="submit" value="Submit" class="pass-reset-submit btn btn-success btn-sm" />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--     <div align="center">
     <h3>Please log into The Hunt!</h3>
     <form action="/login" method="POST">
         <label>Email:
@@ -21,5 +39,5 @@
         <div align="center">
             <input type="submit" value="Log into The Hunt!">
         </div>
-    </div>
+    </div> -->
 {% endblock %}

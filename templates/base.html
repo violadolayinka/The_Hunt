@@ -3,22 +3,23 @@
 <head>
    <title>The Hunt</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/static/css/the_hunt.css" rel="stylesheet">
+    <link href="/static/css/thehunt.css" rel="stylesheet">
 </head>
 <body>
 {% block nav %}
-  <nav>
-    <div>
-    <img src="../static/img/the_hunt.jpg" height="50" align="left">
-    </div>
-    <div>
-        <a href='/dashboard'>Dashboard</a>
-        <a href="/position">Add a New Position</a>
-        <a href="/listofpositions"> Positions</a>
-        <a href="/listofdocuments">Documents</a>
-        <a href="/listofnotes">Notes</a>
-        <a href='/logout'> Log Out </a>
-   </div>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div>
+         <img src="../static/img/the_hunt.jpg" height="50" align="left">
+      </div>
+      <div>
+          <a href='/dashboard'>Dashboard</a>
+          <a href="/position">Add a New Position</a>
+          <a href="/listofpositions"> Positions</a>
+          <a href="/listofdocuments">Documents</a>
+          <a href="/listofnotes">Notes</a>
+          <a href='/logout'> Log Out </a>
+     </div>
   </nav> 
 {% endblock %}
   <div class="container">
