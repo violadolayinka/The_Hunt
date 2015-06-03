@@ -7,27 +7,33 @@
 
 {% block body %}
 <div class="wrap">
-    <p class="form-title">The Hunt</p>
-<!-- <h1 align="center">The Hunt</h1>
- -->
- <!-- <div align="center"><img src="../static/img/the_hunt.jpg" width="600"></div> -->
+    
+<!-- h1 align="center">The Hunt</h1> -->
+
+ <div align="center"><img src="../static/img/the_hunt.jpg" width="600"></div>
 <br><br>
 <div class="container" align="center">
     <div class="col-md-12">
         <div class="pr-wrap">
             <div class="pass-reset">
+
                 <form action="/login" method="POST">
-                    <label> Please enter your email:
+                    <div align="center">
+                        <label>Email:
                         <input type="email" name="email" placeholder="Email">
-                    </label>
-                    <label>Password:
-                        <input type="password" name="password" placeholder="Password" required>
-                    </label>
-                    <input type="submit" value="Submit" class="pass-reset-submit btn btn-success btn-sm" />
+                        </label>
+                        <label>Password:
+                            <input type="password" name="password" placeholder="Password" required>
+                        </label>
+                        <input type="submit" value="Submit" class="pass-reset-submit btn btn-success btn-sm" />
+                    </div>
             </div>
         </div>
     </div>
 </div>
 <br>
- <a href='/register'>Register</a></div>
+<div align="center"><a href='/register'><strong>New to The Hunt? <em>Register here!</em></strong></a></div>
+
+<br>
+<br>
 {% endblock %}

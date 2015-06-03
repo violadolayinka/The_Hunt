@@ -2,23 +2,60 @@
 
 {% block body %}
 
-  <h2> Welcome {{user.first_name}} to The Hunt!</h2> 
-  <img src="../static/img/ViolaSP2015.png" height="100" alt="User's profile picture" align="left">
-  <br>
-  <br>
+
+<div class="page-header">
+  <h1>Welcome {{user.first_name}} to The Hunt!</h1>
+</div>
+<h2> </h2> 
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-6 col-md-3">
+      <div class="circle-image"><img src="../static/img/ViolaSP2015.png" height="100"/></div>
+    </div>
+  </div>
+</div>
+
   <br>
   <br>
   <br>
   <br>
 
-  <h3> Here are your active positions:</h3>
-  {% for position in positions %}
-    <ul>
-        <li><a href="/position/{{position.position_id}}">{{ position.title }} ({{ position.company_name }}) </a><br><strong>Next Deadline:</strong><br>{{ position.deadline }} </li>
-    </ul>
-  {% endfor %}
+<div class="page-sub-header"><h2><small>Here are your active positions:
+  </small></h2></div>  
+  <div class="col-lg-12">
   <form action='/position'>
     <input type="submit" value="Add a new position here!">
   </form>
+
+<!-- <div class="container-fluid"> -->
+<!--   <div class="row box-set"> -->
+{% for position in positions %}
+<div class="col-md-4">
+      
+  <figure class="box"><div class="box_text"><a href="/position/{{position.position_id}}">
+    <h4 class="list-group-item-heading">{{ position.title }}</h4></a>
+    <h5 class="list-group-item-description">{{ position.company_name }}</h4>
+    <p class="list-group-item-text"><strong>Next Deadline:</strong><br>{{ position.deadline}} 
+    <span class="label label-success label-as-badge">{{position.application_status}}</span></p></div>
+  </figure>  
+   
+</div>
+<!-- </div> -->
+   
+<!--   <div class="list-group">
+    <a href="/position/{{position.position_id}}" class="list-group-positions">
+      <h4 class="list-group-item-heading">{{ position.title }}</h4></a>
+      <h5 class="list-group-item-description">{{ position.company_name }}</h4>
+      <p class="list-group-item-text"><strong>Next Deadline:</strong><br>{{ position.deadline }} 
+          <span class="label label-success label-as-badge">{{position.application_status}}</span></p>
+    
+  </div> -->
+
+   <!--  <ul>
+        <li><a href="/position/{{position.position_id}}">{{ position.title }} ({{ position.company_name }}) </a><br><strong>Next Deadline:</strong><br>{{ position.deadline }} 
+          <span class="label label-success label-as-badge">{{position.application_status}}</span></li>
+    </ul> -->
+  {% endfor %}
+
  
 {% endblock %}
