@@ -176,6 +176,30 @@ def position_form():
 #     return redirect('/')
 
 
+@app.route("/delete_position/<int:position_id>", methods=["GET", "POST"])
+def delete_position(position_id):
+    """Deletes a user's position."""
+    if "user_id" in session:
+        position = Position.query.filter_by(position_id=position_id).one()
+        print position
+        if request.method == 'POST':
+            Position.query.filter_by(position_id=position_id).delete()
+            db.session.commit()
+            flash("Position: %s  has been deleted!" % position.title)
+            return redirect('/dashboard')
+    else:
+        flash("Please log into  The Hunt!")
+        return redirect('/')
+
+# @app.route('/delete_position')
+# def delete_position():
+#     """This route deletes a position."""
+#     del session["user_id"]
+
+#     flash("Logged Out. Thanks for using The Hunt!")
+#     return redirect("/")
+
+
 @app.route("/listofpositions")
 def position_list():
     """Shows list of positions."""
@@ -216,15 +240,6 @@ def position(position_id):
 
         flash("Please log into  The Hunt!")
         return redirect('/')
-
-
-@app.route('/delete_position')
-def delete_position():
-    """This route deletes a position."""
-    del session["user_id"]
-
-    flash("Logged Out. Thanks for using The Hunt!")
-    return redirect("/")
 
 
 @app.route('/documents')

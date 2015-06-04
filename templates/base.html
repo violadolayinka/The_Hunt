@@ -7,81 +7,64 @@
   <link rel="stylesheet" href="../static/css/the_hunt.css">
 </head>
 <body>
+
 {% block nav %}
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <img src="../static/img/the_hunt.jpg" height="50" align="left">
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href='/dashboard'>Dashboard<span class="sr-only">(current)</span></a></li>
-        <li><a href="/position">Add a New Position</a></li>
-        <li><a href="/listofpositions">Active Positions  <span class="badge">6</span></a></a></li>
-        <li class="dropdown">
-          <a href='/dashboard' class="dropdown-toggle" role="button" aria-expanded="true">Your Assets <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="/listofdocuments">Documents</a></li>
-            <li><a href="/listofnotes">Notes</a></li>
-            <!-- <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li class="divider"></li>
-            <li><a href="#">One more separated link</a></li> -->
-          </ul>
-        </li>
-      </ul>
-      <!-- <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
+<div class="container">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" 
+                  class="navbar-toggle collapsed" 
+                  data-toggle="collapse" 
+                  data-target="#navbar"
+                  aria-expanded="false"
+                  aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+          </button>
+          <img src="../static/img/the_hunt.jpg" height="50" align="left">
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form> -->
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href='/logout'> Log Out </a></li>
-        <!-- <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Separated link</a></li> -->
-          </ul>
-        </li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href='/dashboard'>Dashboard</a></li>
+                <li><a href="/position">Add a New Position</a></li>
+                <li><a href="/listofpositions">Active Positions <span class="badge">6</span></a></li>
+                <li class="dropdown">
+                    <a href='/dashboard' 
+                       class="dropdown-toggle" 
+                       role="button" 
+                       aria-expanded="true"> Your Assets <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="/listofdocuments">Documents</a></li>
+                        <li><a href="/listofnotes">Notes</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href='/logout'> Log Out </a></li>
+            </ul>
+        </div>
+    </div>
+  </nav>  
+</div>
 {% endblock %}
-  <div class="container-fluid">
+<div class="container-fluid">
   {% with messages = get_flashed_messages() %}
       {% for message in messages %}
           <div class="alert alert-info" role="alert">{{ message }}</div>
       {% endfor %}
   {% endwith %}
-  </div>
-  <br>
-  <br>
-   {% block body %}
-  
-   {% endblock %}
-<!-- 
-<footer> -->
-  
-   <footer>
-    <p class="text-muted" align="center">Copyright The Hunt | Viola D. Olayinka's HB Final Project 2015 | All Rights Reserved</p></footer>
-<!-- </footer> -->
 
+   {% block body %}
+
+   {% endblock %}
+  
+  
+   <footer><p class="text-muted" align="center">Copyright The Hunt | Viola D. Olayinka's HB Final Project 2015 | All Rights Reserved</p></footer>
+ <script src="http://code.jquery.com/jquery.js"></script>
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</div>
 </body>
 </html>

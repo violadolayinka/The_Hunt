@@ -1,23 +1,59 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<h3>Add a new position!</h3>
-<form action="/submit_position" method='POST'>
-  <div>
-    <label for="title"><strong>Position Title:</strong></label>
-    <input type="text" name="title">
+<div class="container">
+  <div class="page-header">
+    <h1>Hunting begins now...</h1>
+    <p class="lead">Here's to the start of a successful job application. Happy Hunting!
+    </p>
+  </div>
+
+
+  <form action="/submit_position" method='POST'>
+    <div class="form-group">
+      <label for="title"> Position Title 
+        <input type="text" 
+               name="title"
+               class="form-control"
+               placeholder="Enter the position's title">
+      </label>
+    </div>
+  
+    <div class="form-group">
+      <label for="position_summary">Position Summary
+        <textarea rows="4" cols="50" name="position_summary" value="position_summary">Enter the position details here!</textarea>
   </div>
   <br>
-  <div>
-    <label for="position_summary"><strong>Position Summary:</strong></label><br>
-    <textarea rows="4" cols="50" name="position_summary" value="position_summary">Enter the position details here!</textarea>
+  <div class="row">
+      <div class='col-sm-6'>
+          <div class="form-group">
+            <label for="deadline"><strong>What's your deadline?</strong></label>
+              <div class='input-group date' id='datetimepicker1'>
+                  <input type="date" name="deadline" value="deadline" class="form-control" />
+                  <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
+              </div>
+          </div>
+      </div>
+      <script type="text/javascript">
+          $(function () {
+              $('#datetimepicker1').datetimepicker();
+          });
+      </script>
   </div>
-  <br>
-  <div>
-    <label for="deadline"><strong>What's your deadline?</strong></label>
-      <input type="date" name="deadline" value="deadline">
-  </div>
-  <br>
+
+
+
+
+
+
+
+
+
+
+
+
   <div>
     <label for="company_name"><strong>Company Name:</strong></label>
       <input type="text" name="company_name">
@@ -46,5 +82,5 @@
       <input type="submit">
   </div>
 </form>
-
+</div>
 {% endblock %}

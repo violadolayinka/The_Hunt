@@ -1,10 +1,13 @@
-<html>
-<head>
-   <title>The Hunt</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-<div align="center"><h4>New to The Hunt?<br>Sign Up!</h4></div>
+{% block nav %}
+<!-- THIS IS OVERRIDING THE NAVIGATION BAR FROM THE BASE.HTML -->
+{% endblock %}
+
+{% block body %}
+
+<div align="center">
+  <h4>New to The Hunt?<br>Sign Up!</h4></div>
 
 <form action='/submit_register' method='POST'>
   <div class="form-group">
@@ -17,22 +20,26 @@
       <label for="password">Password:</label>
       <input type="text" name="password" required>
   </div>
-    <br>
-  <div class="form-group">
-      <label for="picture">Upload link to professional headshot here:</label>
-      <input type="text" name="picture" value="picture">
-  </div>
-    <br>
-  <div class="form-group">
-      <label for="email_address">Email Address:</label>
+  
+  <div class="control-group">
+      <label for="control-label" for="inputIcon">Email address</label>
         <input type="email" name="email_address" required>
   </div>
     <br>
-   <!--  <div>
-      <label for="last_login">Today's date:</label>
-        <input type="date" name="last_login" value="last_login">
+   
+
+  <label class="control-label" for="inputIcon">Email address</label>
+  <div class="controls">
+    <div class="input-prepend">
+      <span class="add-on"><i class="icon-envelope"></i></span>
+      <input class="span2" id="inputIcon" type="text">
     </div>
-    <br> -->
+  </div>
+</div>
+
+
+
+
     <div class="form-group">
       <label for="linkedin_url">LinkedIn: </label>
       <input type="text" name="linkedin_url" >
@@ -57,12 +64,5 @@
     </div>  
 </form>
 
-<div align="center">
-  <footer>
-   <p>Copyright The Hunt Viola D. Olayinka's HB Final Project 2015. <br>All rights reserved.</p>
-  </footer>
-</div>
-</div>
-
-</body>
-</html>
+ 
+{% endblock %}
