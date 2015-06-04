@@ -14,6 +14,10 @@
   background: #0DD6FF;
 }
 */
+.label-as-badge {
+    border-radius: 1em;
+}
+
 .circle-image{
     width:200px;
     height:200px;

@@ -34,7 +34,38 @@
     <h4 class="list-group-item-heading">{{ position.title }}</h4></a>
     <h5 class="list-group-item-description">{{ position.company_name }}</h4>
     <p class="list-group-item-text"><strong>Next Deadline:</strong><br>{{ position.deadline}} 
-    <span class="label label-success label-as-badge">{{position.application_status}}</span></p></div><form action="/delete_position/{{ position.position_id }}" method="POST">
+
+
+
+    {% if position.application_status == "in_progress" %}
+    <span class="label label-info label-as-badge">{{position.application_status}}</span>
+    {% endif %}
+
+    {% if position.application_status == "complete" %}
+    <span class="label label-success label-as-badge">{{position.application_status}}</span>
+    {% endif %}
+
+    {% if position.application_status == "rejected" %}
+    <span class="label label-default label-as-badge">{{position.application_status}}</span>
+    {% endif %}
+
+    {% if position.application_status == "not_yet_started" %}
+    <span class="badge progress-bar-danger label-as-badge">{{position.application_status}}</span>
+    {% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+</p></div><form action="/delete_position/{{ position.position_id }}" method="POST">
     <input type="submit" value="Delete this position!"></form>
   </form>
   </figure>  

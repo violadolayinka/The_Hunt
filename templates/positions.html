@@ -8,7 +8,7 @@
     </p>
   </div>
 
-
+<br>
   <form action="/submit_position" method='POST'>
     <div class="form-group">
       <label for="title"> Position Title 
@@ -18,69 +18,85 @@
                placeholder="Enter the position's title">
       </label>
     </div>
-  
     <div class="form-group">
       <label for="position_summary">Position Summary
-        <textarea rows="4" cols="50" name="position_summary" value="position_summary">Enter the position details here!</textarea>
-  </div>
-  <br>
-  <div class="row">
-      <div class='col-sm-6'>
-          <div class="form-group">
-            <label for="deadline"><strong>What's your deadline?</strong></label>
-              <div class='input-group date' id='datetimepicker1'>
-                  <input type="date" name="deadline" value="deadline" class="form-control" />
-                  <span class="input-group-addon">
-                      <span class="glyphicon glyphicon-calendar"></span>
-                  </span>
-              </div>
-          </div>
-      </div>
+        <br><textarea rows="4" 
+                  cols="50" 
+                  name="position_summary" 
+                  value="position_summary"
+                  placeholder="Enter the position details here!">
+            </textarea>
+      </label>
+    </div>
+    <div class="form-group">
+          <label for="deadline">What's your deadline?
+            <div class='input-group date' id='datetimepicker1'>
+              <input type="date" name="deadline" value="deadline" class="form-control" /><span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+            </div>
+          </label>  
       <script type="text/javascript">
           $(function () {
               $('#datetimepicker1').datetimepicker();
           });
       </script>
-  </div>
-
-
-
-
-
-
-
-
-
-
-
-
-  <div>
-    <label for="company_name"><strong>Company Name:</strong></label>
-      <input type="text" name="company_name">
-  </div>
-  <br> 
-  <div> 
-    <label for="location"><strong>Location:</strong></label>
-      <input type="text" name="location">
-  </div>
-  <br> 
-  <div>
-    <label for="application_status"><strong>Application Status:</strong></label>
-      <input type="radio" name="status" value="not_yet_started" required> Not Yet Started?
-      <input type="radio" name="status" value="in_progress" required> In Progress  
-      <input type="radio" name="status" value="complete" required> Complete 
-      <input type="radio" name="status" value="rejected" required> Rejected
-  </div>
-  <br> 
-  <div>
-    <label for="position_url"><strong>Position Url:</strong></label>
-      <input type="text" name="position_url">
-  </div>
-  <br>
-  <div>
-    <label for="submit"></label>
-      <input type="submit">
-  </div>
-</form>
+    </div>
+    <div class="form-group">
+      <label for="company_name">Company Name
+        <input type="text" 
+               name="company_name"
+               class="form-control"
+               placeholder="Enter the company's name">
+      </label>
+    </div>
+    <div class="form-group">
+      <label for="location">Location
+        <input type="text" 
+               name="location"
+               class="form-control"
+               placeholder="Enter the location">
+      </label>
+    </div>
+    <div class="form-group">
+      <label for="application_status">Application Status<br>
+        <input type="radio" 
+               name="status" 
+               value="not yet started" 
+               required> Not Yet Started?
+        <input type="radio" 
+               name="status" 
+               value="in progress" 
+               required> In Progress  
+        <input type="radio" 
+               name="status" 
+               value="complete" 
+               required> Complete 
+        <input type="radio" 
+               name="status" 
+               value="rejected" 
+               required> Rejected
+      </label>
+    </div>
+    <div>
+      <label for="position_url">Position Url
+        <input type="text" 
+               name="position_url"
+               class="form-control"
+               placeholder="Enter the location">
+      </label>
+    </div><br>
+    <div>
+      <label for="position_url">Contact
+        <input type="text" 
+               name="position_url"
+               class="form-control"
+               placeholder="Enter the location">
+      </label>
+    </div><br>
+    <div>
+      <label for="submit">
+        <input type="submit">
+      </label>
+    </div>
+  </form>
 </div>
 {% endblock %}

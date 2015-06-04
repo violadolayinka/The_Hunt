@@ -74,6 +74,19 @@ class Notes(db.Model):
 
     position = db.relationship("Position", backref=db.backref("notes", order_by=note_id))
 
+
+class Contact(db.Model):
+    """User's Contacts."""
+
+    __tablename__ = "contacts"
+
+    contact_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    position_id = db.Column(db.Integer, db.ForeignKey('positions.position_id'), nullable=False)
+    name = db.Column(db.String(100))
+    email_address = db.Column(db.String(100))
+    phone_number = db.Column(db.String(100))
+
+    position = db.relationship("Position", backref=db.backref("contacts", order_by=contact_id))
 ##############################################################################
 # Helper functions
 
