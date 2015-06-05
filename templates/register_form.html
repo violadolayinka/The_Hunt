@@ -5,21 +5,43 @@
 {% endblock %}
 
 {% block body %}
-
+<div class="container">
+  <div class="page-header">
+    <h1>New to The Hunt?</h1>
+    <p class="lead">Sign Up!</p>
+  </div>
+</div>
 <div align="center">
-  <h4>New to The Hunt?<br>Sign Up!</h4></div>
+  <h4><br></h4></div>
 
 <form action='/submit_register' method='POST'>
-  <div class="form-group">
-      <label for="name">What's your name? </label>
-      <input type="text" name="first_name" value="First name">
-      <input type="text" name="last_name" value="Last name">
+  <div class="row" align="center">
+    <div class="form-group form-inline">
+      <div class="col-md-6">
+        <label for="name">What's your name?
+          <input type="text" 
+                 name="first_name" 
+                 class="form-control"
+                 placeholder="First name">
+          <input type="text" 
+                 name="last_name" 
+                 class="form-control"
+                 placeholder="Last name">
+        </label>
+      </div>  
+    </div>
   </div>
-    <br>
-  <div class="form-group">
-      <label for="password">Password:</label>
-      <input type="text" name="password" required>
-  </div>
+  <div class="row" align="center">
+    <div class="form-group form-inline">
+      <label for="password">Password:
+        <input type="text" 
+             name="password"
+             class="form-control"
+             placeholder="Enter a password" 
+             required>
+      </label>
+    </div>
+  </div>  
   
   <div class="control-group">
       <label for="control-label" for="inputIcon">Email address</label>

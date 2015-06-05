@@ -73,7 +73,6 @@ def process_registration():
     twitter_url = request.form.get("twitter_url")
     facebook_url = request.form.get("facebook_url")
     website_url = request.form.get("website_url")
-#if the user's email already exists on file
     preexisting_user = User.query.filter_by(email_address=email_address).first()
     if preexisting_user:
         flash("This email address is already on file. Please log in!")
@@ -89,34 +88,6 @@ def process_registration():
 
     flash("Thanks %s for joining the hunt!" % first_name)
     return redirect('/')
-
-
-# @app.route('/login')
-# def login_form():
-#     """Show login form."""
-#     return render_template("login_form.html")
-
-
-# @app.route('/login', methods=['POST'])
-# def login_process():
-#     """Process login."""
-#     email_address = request.form.get("email")
-#     password = request.form.get("password")
-
-#     user = User.query.filter_by(email_address=email_address).first()
-
-#     if not user:
-#         flash("Please try again!")
-#         return redirect('/login')
-
-#     if user.password != password:
-#         flash("Incorrect password")
-#         return redirect('/login')
-
-#     session["user_id"] = user.user_id
-
-#     flash("Logged in")
-#     return redirect('/dashboard')
 
 
 @app.route('/logout')
@@ -144,11 +115,6 @@ def position_page():
 @app.route('/submit_position', methods=['POST'])
 def position_form():
     """Process a user's position."""
-    # FIXME check for logged in user like in above
-    # if "user_id" in session:
-    #     my_user_id = session["user_id"]
-    #     user_id = User.query.filter_by(user_id=my_user_id).one()
-
     u = session["user_id"]
     title = request.form["title"]
     position_summary = request.form["position_summary"]
@@ -171,10 +137,6 @@ def position_form():
     flash("Position: %s  added!" % title)
     return redirect("/listofpositions")
 
-# else:
-#     flash("Please log into  The Hunt!")
-#     return redirect('/')
-
 
 @app.route("/delete_position/<int:position_id>", methods=["GET", "POST"])
 def delete_position(position_id):
@@ -190,14 +152,6 @@ def delete_position(position_id):
     else:
         flash("Please log into  The Hunt!")
         return redirect('/')
-
-# @app.route('/delete_position')
-# def delete_position():
-#     """This route deletes a position."""
-#     del session["user_id"]
-
-#     flash("Logged Out. Thanks for using The Hunt!")
-#     return redirect("/")
 
 
 @app.route("/listofpositions")
@@ -215,11 +169,9 @@ def position_list():
 @app.route("/position/<int:position_id>", methods=["GET", "POST"])
 def position(position_id):
     """Shows info about a position."""
-    #FIXME maybe, make sure the user owns these positions
     if "user_id" in session:
         position = Position.query.filter_by(position_id=position_id).one()
         print "Here's the user currently in session"
-        # print "This is the userID", user.user_id
         print "This is the position userid", position.user_id
 
         if session['user_id'] != position.user_id:
@@ -252,14 +204,6 @@ def documents_page():
         flash("Please log into  The Hunt!")
         return redirect('/')
 
-    # if "user_id" in session:
-    #     u = session["user_id"]
-    #     #TODO check if we use user_id?
-    #     return render_template("documents.html", user_id=u)
-    # else:
-    #     flash("Please log into  The Hunt!")
-    #     return redirect('/')
-
 
 @app.route('/submit_documents', methods=['POST'])
 def document_form():
@@ -288,7 +232,6 @@ def document_list():
     if "user_id" in session:
         u_id = session["user_id"]
         user_object = User.query.get(u_id)
-        #FIXME
         position = Position.query.get(u_id)
 
         documents = []
@@ -303,7 +246,6 @@ def document_list():
 
 @app.route("/document/<int:document_id>")
 def document(document_id):
-    #FIXME check for login
     """Shows info about a position."""
 
     document = Documents.query.get(document_id)
@@ -313,26 +255,79 @@ def document(document_id):
 @app.route("/listofnotes")
 def note_list():
     """Shows list of notes."""
-    # if "user_id" in session:
-    #     my_user_id = session["user_id"]
-    #     user = User.query.filter_by(user_id=my_user_id).one()
-    #     positions = Position.query.filter_by(user_id=my_user_id).all()
-    #     return render_template("dashboard.html", user=user, positions=positions)
-    # else:
-    #     flash("Please log into  The Hunt!")
-    #     return redirect('/')
+    if "user_id" in session:
+        u_id = session["user_id"]
+        user_object = User.query.get(u_id)
+        print user_object
+        note = Notes.query.get(u_id)
+        print "Here's the notes:"
+        print note
+        notes = []
 
-    #FIXME check for login
-    u_id = session["user_id"]
-    print u_id
-    print type(u_id)
-    position_object = Position.query.get(u_id)
-    pos_id = position_object.position_id
-    notes = Notes.query.filter_by(position_id=pos_id).all()
-
-    return render_template("note_list.html", notes=notes)
+        for note in notes:
+            notes.extend(position.notes)
+        return render_template("note_list.html", notes=notes, note=note)
+    else:
+        flash("Please log into  The Hunt!")
+        return redirect('/')
 
 
+# @app.route('/documents')
+# def documents_page():
+#     """This will show the a page for an user's documents."""
+#     if "user_id" in session:
+#         positions = Position.query.filter_by(user_id=my_user_id).all()
+#         return render_template("documents.html", user=session['user_id'], positions=positions)
+#     else:
+#         flash("Please log into  The Hunt!")
+#         return redirect('/')
+
+
+# @app.route('/submit_documents', methods=['POST'])
+# def document_form():
+#     """Process a user's documents."""
+#     # FIXME
+#     position_id = request.form["position_id"]
+#     document_type = request.form["document_type"]
+#     #TODO see if they have a note or a new document, make sure you dont add empty attributes/get key errors
+#     document_content = request.form["document"]
+#     note_details = request.form["note_details"]
+
+#     new_document = Documents(position_id=position_id, document_type=document_type,
+#                              document_content=document_content)
+#     new_note = Notes(position_id=position_id, note_details=note_details)
+#     db.session.add(new_document)
+#     db.session.add(new_note)
+#     db.session.commit()
+
+#     flash("Your %s has been added!" % document_type)
+#     return redirect('/dashboard')
+
+
+# @app.route("/listofdocuments")
+# def document_list():
+#     """Shows list of documents."""
+#     if "user_id" in session:
+#         u_id = session["user_id"]
+#         user_object = User.query.get(u_id)
+#         position = Position.query.get(u_id)
+
+#         documents = []
+
+#         for position in user_object.positions:
+#             documents.extend(position.documents)
+#         return render_template("document_list.html", documents=documents, position=position)
+#     else:
+#         flash("Please log into  The Hunt!")
+#         return redirect('/')
+
+
+# @app.route("/document/<int:document_id>")
+# def document(document_id):
+#     """Shows info about a position."""
+
+    document = Documents.query.get(document_id)
+    return render_template("document.html", document=document)
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the point
     # that we invoke the DebugToolbarExtension
