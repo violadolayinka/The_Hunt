@@ -27,9 +27,9 @@
   <label for="title" required> What type of document is this? </label>
   <br>
       <select name="document_type">
-      <option value="cover_letter">Cover Letter</option>
+      <option value="cover letter">Cover Letter</option>
       <option value="resume">Resume</option>
-      <option value="professional_references">Professional References</option>
+      <option value="professional references">Professional References</option>
       <option value="other">Other</option>
      </select>
   <br>
@@ -41,12 +41,21 @@
     <input type="submit">
   </form>  
   <br>
+  <h3>Contacts for {{ position.title }} ({{ position.company_name }})</h3>
+    <ul>
+      {% for contact in contacts %}
+        <li>
+          {{ contact.name }}
+        </li>
+      {% endfor %}
+    </ul>
+  <br>
   <h3>Documents for {{ position.title }} ({{ position.company_name }})</h3>
     <ul>
       {% for document in document %}
           <li>
               <a href="/document/{{ document.document_id}}">
-                {{ document.document_type }})
+                {{ document.document_type }}
               </a>
           </li>
       {% endfor %}

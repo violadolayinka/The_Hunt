@@ -4,7 +4,7 @@ from jinja2 import StrictUndefined
 from datetime import datetime
 from flask import Flask, render_template, request, flash, redirect, session
 # from flask_debugtoolbar import DebugToolbarExtension
-from model import connect_to_db, db, User, Position, Documents, Notes
+from model import connect_to_db, db, User, Position, Documents, Notes, Contact
 
 
 app = Flask(__name__)
@@ -180,6 +180,7 @@ def position(position_id):
 
         notes = Notes.query.filter_by(position_id=position_id).all()
         document = Documents.query.filter_by(position_id=position_id).all()
+        contacts = Contact.query.filter_by(position_id=position_id).all()
 
         if request.method == "POST":
             new_application_status = request.form["status"]
@@ -187,7 +188,7 @@ def position(position_id):
             db.session.commit()
             flash("Your application status is updated!")
 
-        return render_template("position.html", user_id=session['user_id'], position=position, notes=notes, document=document)
+        return render_template("position.html", user_id=session['user_id'], position=position, notes=notes, document=document, contacts=contacts)
     else:
 
         flash("Please log into  The Hunt!")
