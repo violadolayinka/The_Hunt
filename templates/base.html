@@ -4,52 +4,69 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>The Hunt</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans:300italic,400italic,600italic,700italic,800italic,700,300,600,800,400' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="../static/css/the_hunt.css">
 </head>
 <body>
 
 {% block nav %}
-<div class="container">
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" 
-                  class="navbar-toggle collapsed" 
-                  data-toggle="collapse" 
-                  data-target="#navbar"
-                  aria-expanded="false"
-                  aria-controls="navbar">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-          </button>
-          <img src="../static/img/the_hunt.jpg" height="50" align="left">
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-             <ul class="nav navbar-nav">
-                <li class="active"><a href='/dashboard'>Dashboard</a></li>
-                <li><a href="/position">Add a New Position</a></li>
-                <li><a href="/listofpositions">Active Positions <span class="badge">6</span></a></li>
-                <li class="dropdown">
-                    <a href='/dashboard' 
-                       class="dropdown-toggle" 
-                       role="button" 
-                       aria-expanded="true"> Your Assets <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="/listofdocuments">Documents</a></li>
-                        <li><a href="/listofnotes">Notes</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href='/logout'> Log Out </a></li>
-            </ul>
-        </div>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <img src="../static/img/the_hunt.jpg" height="50" align="left">
     </div>
-  </nav>  
-</div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active">
+          <a href='/dashboard'>Dashboard<span class="sr-only">(current)</span></a>
+        </li>
+        <li>
+          <a href="/position">Add a New Position</a>
+        </li>
+        <li>
+          <a href="/listofpositions">Active Positions 
+            <span class="badge" id="position_badge">6</span></a>
+        </li>
+        <li class="dropdown">
+          <a href='/dashboard' 
+             class="dropdown-toggle" 
+             data-toggle="dropdown" 
+             role="button" 
+             aria-expanded="false">Your Assets<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li>
+              <a href="/listofdocuments">Documents</a>
+            </li>
+            <li>
+              <a href="/listofnotes">Notes</a>
+            </li>
+            <li>
+              <a href="/listofcontacts">Contacts</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      
+      <ul class="nav navbar-nav navbar-right">
+        <form class="navbar-form navbar-left" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search">
+          </div>
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+        <li><a href='/logout'> Log Out </a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
 {% endblock %}
+
 <div class="container-fluid">
   {% with messages = get_flashed_messages() %}
       {% for message in messages %}
@@ -60,9 +77,19 @@
    {% block body %}
 
    {% endblock %}
-  
-  
-   <footer><p class="text-muted" align="center">Copyright The Hunt | Viola D. Olayinka's HB Final Project 2015 | All Rights Reserved</p></footer>
+
+
+    <nav class="navbar navbar-default navbar-fixed-bottom" 
+        role="navigation">
+      <div class="container">
+        <br>
+        <p class="text-muted" align="center">Copyright© The Hunt™ <br> Viola D. Olayinka's Hackbright Academy Final Project  ◆  Spring 2015   <br>  All Rights Reserved</p>
+      </div>
+    </nav>
+
+
+
+
  <script src="http://code.jquery.com/jquery.js"></script>
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </div>

@@ -10,81 +10,102 @@
     <h1>New to The Hunt?</h1>
     <p class="lead">Sign Up!</p>
   </div>
+
+
+<br>
+  <div align="center">
+    <form action='/submit_register' method='POST'>
+      <div class="col-md-4 col-lg-6">
+        <div class="form-group">
+          <div class="form-inline">
+            <label for="name">What's your first name?  
+              <input type="text" 
+                     name="first_name" 
+                     class="form-control"
+                     placeholder="First name">
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-inline">
+            <label for="name">What's your last name?
+              <input type="text" 
+                     name="last_name" 
+                     class="form-control"
+                     placeholder="Last name">
+            </label>
+          </div>
+        </div>  
+        <div class="form-group">
+          <div class="form-inline">
+            <label for="password">Password:
+              <input type="text" 
+                   name="password"
+                   class="form-control"
+                   placeholder="Enter a password" 
+                   required>
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-inline">
+            <label for="email">Email address:
+              <input type="text" 
+                     name="email_address"
+                     placeholder="Enter your email address"
+                     class="form-control"  
+                     required>
+            </label>
+          </div>
+        </div> 
+      </div>
+      <div class="col-md-4 col-lg-6">
+        <div class="form-group">
+          <div class="form-inline">
+            <label for="linkedin_url">LinkedIn: 
+              <input type="text" 
+                     name="linkedin_url" 
+                     class="form-control" 
+                     placeholder="Enter your LinkedIn Url">
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-inline">
+            <label for="twitter_url">Twitter:
+              <input type="text" 
+                     name="twitter_url"
+                     class="form-control" 
+                     placeholder="Enter your Twitter Url">
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-inline">
+            <label for="facebook_url">Facebook:
+              <input type="text" 
+                     name="facebook_url"
+                     class="form-control" 
+                     placeholder="Enter your Facebook Url">
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-inline">
+            <label for="website_url">Website:
+              <input type="text" 
+                     name="website_url"
+                     class="form-control" 
+                     placeholder="Enter your Website Url">
+            </label>
+          </div>
+        </div>
+      </div>
+      <input type="submit" value="Submit" class="pass-reset-submit btn btn-success btn-sm" id="button" />
+    </form>
+  </div>
 </div>
-<div align="center">
-  <h4><br></h4></div>
-
-<form action='/submit_register' method='POST'>
-  <div class="row" align="center">
-    <div class="form-group form-inline">
-      <div class="col-md-6">
-        <label for="name">What's your name?
-          <input type="text" 
-                 name="first_name" 
-                 class="form-control"
-                 placeholder="First name">
-          <input type="text" 
-                 name="last_name" 
-                 class="form-control"
-                 placeholder="Last name">
-        </label>
-      </div>  
-    </div>
-  </div>
-  <div class="row" align="center">
-    <div class="form-group form-inline">
-      <label for="password">Password:
-        <input type="text" 
-             name="password"
-             class="form-control"
-             placeholder="Enter a password" 
-             required>
-      </label>
-    </div>
-  </div>  
-  
-  <div class="control-group">
-      <label for="control-label" for="inputIcon">Email address</label>
-        <input type="email" name="email_address" required>
-  </div>
-    <br>
-   
-
-  <label class="control-label" for="inputIcon">Email address</label>
-  <div class="controls">
-    <div class="input-prepend">
-      <span class="add-on"><i class="icon-envelope"></i></span>
-      <input class="span2" id="inputIcon" type="text">
-    </div>
-  </div>
-</div>
-
-
-
-
-    <div class="form-group">
-      <label for="linkedin_url">LinkedIn: </label>
-      <input type="text" name="linkedin_url" >
-    </div>
-    <br>
-    <div class="form-group">
-      <label for="twitter_url">Twitter:</label>
-      <input type="text" name="twitter_url">
-    </div>
-    <br>
-    <div class="form-group">
-      <label for="facebook_url">Facebook:</label>
-      <input type="text" name="facebook_url">
-    </div>
-    <br>
-    <div class="form-group">
-      <label for="website_url">Website:</label>
-      <input type="text" name="website_url">
-    </div>
-    <br>
-      <button type="submit" class="btn btn-default">Submit</button>
-    </div>  
-</form>
-
+     
+</div>  
  
 {% endblock %}

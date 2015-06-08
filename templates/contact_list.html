@@ -2,7 +2,8 @@
 {% block body %}
 
   <h1>Contacts</h1>
-
-  <p>Details: {{ contacts.name }}</p> 
+{% for contact in contacts %}
+  <p>Details: {{ contact.name }}</p> 
+{% endfor %}
 
 {% endblock %}

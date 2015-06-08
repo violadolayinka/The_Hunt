@@ -1,3 +1,48 @@
+/*body {
+      background-image: url("the_hunt_blur.jpg");
+      color: #212121;
+      /*text-align: center;*/
+      /*text-shadow: 0 px 0px rgba(0,0,0,.5);*/
+     /* font-family: 'Open Sans Condensed', sans-serif;*/
+   /* }*/
+
+#background_img{
+  background-image: url("/static/img/the_hunt.jpg");
+  /*-webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;*/
+  background-size: cover;
+}
+
+
+.form-group{
+ font-family: 'Open Sans', sans-serif;
+ font-weight: 400
+}
+
+
+
+input[type="email"], 
+input[type="password"] {
+  width: 350px;
+  padding: 20px 0px;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #cccccc;
+  outline: none;
+  color: #B6B6B6;
+  font-size: 16px;
+}
+a,
+a:focus,
+a:hover {
+  color: #009688;
+  font-weight: bold;
+}
+
+.navbar{
+  background-color: #ffffff;
+}
 
 .label-as-badge {
     border-radius: 1em;
@@ -6,7 +51,7 @@
 #button{
   display: block; 
   width: 50%;
-  background-color: #FF962C;
+  /*background-color: #FF962C;*/
 
 }
 .circle-image{
@@ -55,6 +100,7 @@
 
 .footer { 
     display: block;
+    font-family: 'Open Sans', sans-serif;
 }
 .page-header {
    font-size: 2.5em;

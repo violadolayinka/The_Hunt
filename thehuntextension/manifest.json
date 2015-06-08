@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+ 
+  "name": "The Hunt Plugin",
+  "description": "This extension will analyze a page using The Hunt",
+  "version": "1.0",
+ 
+  "browser_action": {
+   "default_icon": "../thehuntextension/the_hunt.png",
+   "default_popup": "popup.html"
+  },
+  "permissions": [
+   "activeTab"
+   ]
+}
