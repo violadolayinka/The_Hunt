@@ -134,6 +134,16 @@ def position_form():
     db.session.add(new_position)
     db.session.commit()
 
+    contact_name = request.form["contact_name"]
+    contact_email_address = request.form["email_address"]
+    contact_phone_number = request.form["phone_number"]
+    position_id = new_position.position_id
+
+    new_contact = Contact(name=contact_name, email_address=contact_email_address,
+                          phone_number=contact_phone_number, position_id=position_id)
+    db.session.add(new_contact)
+    db.session.commit()
+
     flash("Position: %s  added!" % title)
     return redirect("/listofpositions")
 
@@ -209,10 +219,8 @@ def documents_page():
 @app.route('/submit_documents', methods=['POST'])
 def document_form():
     """Process a user's documents."""
-    # FIXME
     position_id = request.form["position_id"]
     document_type = request.form["document_type"]
-    #TODO see if they have a note or a new document, make sure you dont add empty attributes/get key errors
     document_content = request.form["document"]
     note_details = request.form["note_details"]
 
@@ -273,62 +281,34 @@ def note_list():
         return redirect('/')
 
 
-# @app.route('/documents')
-# def documents_page():
-#     """This will show the a page for an user's documents."""
-#     if "user_id" in session:
-#         positions = Position.query.filter_by(user_id=my_user_id).all()
-#         return render_template("documents.html", user=session['user_id'], positions=positions)
-#     else:
-#         flash("Please log into  The Hunt!")
-#         return redirect('/')
+@app.route('/contacts')
+def contacts_page():
+    """This will show the a page for an user's contacts."""
+    if "user_id" in session:
+        positions = Position.query.filter_by(user_id=my_user_id).all()
+        return render_template("contacts.html", user=session['user_id'], positions=positions)
+    else:
+        flash("Please log into  The Hunt!")
+        return redirect('/')
 
 
-# @app.route('/submit_documents', methods=['POST'])
-# def document_form():
-#     """Process a user's documents."""
-#     # FIXME
-#     position_id = request.form["position_id"]
-#     document_type = request.form["document_type"]
-#     #TODO see if they have a note or a new document, make sure you dont add empty attributes/get key errors
-#     document_content = request.form["document"]
-#     note_details = request.form["note_details"]
+@app.route("/listofcontacts")
+def contacts_list():
+    """Shows list of contacts."""
+    if "user_id" in session:
+        u_id = session["user_id"]
+        user_object = User.query.get(u_id)
 
-#     new_document = Documents(position_id=position_id, document_type=document_type,
-#                              document_content=document_content)
-#     new_note = Notes(position_id=position_id, note_details=note_details)
-#     db.session.add(new_document)
-#     db.session.add(new_note)
-#     db.session.commit()
+        contacts = []
 
-#     flash("Your %s has been added!" % document_type)
-#     return redirect('/dashboard')
+        for position in user_object.positions:
+            contacts.extend(position.contacts)
+        return render_template("contact_list.html", contacts=contacts)
+    else:
+        flash("Please log into  The Hunt!")
+        return redirect('/')
 
 
-# @app.route("/listofdocuments")
-# def document_list():
-#     """Shows list of documents."""
-#     if "user_id" in session:
-#         u_id = session["user_id"]
-#         user_object = User.query.get(u_id)
-#         position = Position.query.get(u_id)
-
-#         documents = []
-
-#         for position in user_object.positions:
-#             documents.extend(position.documents)
-#         return render_template("document_list.html", documents=documents, position=position)
-#     else:
-#         flash("Please log into  The Hunt!")
-#         return redirect('/')
-
-
-# @app.route("/document/<int:document_id>")
-# def document(document_id):
-#     """Shows info about a position."""
-
-    document = Documents.query.get(document_id)
-    return render_template("document.html", document=document)
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the point
     # that we invoke the DebugToolbarExtension

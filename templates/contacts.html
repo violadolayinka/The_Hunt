@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container">
+  <div class="page-header">
+    <h1>Contacts</h1>
+    <p class="lead">Keep track of your contacts here!</p>
+  </div>
+  <br>
+  <form action='/submit_contacts' method='POST'>
+    <div class="form-group">
+      <label for="title"> What is the contact's name? 
+        <input type="text" 
+               name="name"
+               class="form-control"
+               placeholder="Enter the contact's first and last name here!">
+      </label>
+    </div>
+    <br>
+    <div class="form-group">
+      <label for="title"> What is their email address?  
+        <input type="text" 
+               name="email_address"
+               class="form-control"
+               placeholder="Enter the contact's email">
+      </label>
+    </div>
+    <br>
+    <div class="form-group">
+      <label for="title"> What is their phone number?   
+        <input type="text" 
+               name="phone_number"
+               class="form-control"
+               placeholder="Enter the contact's email">
+      </label>
+    </div>
+    <div>
+      <label for="submit">
+        <input type="submit">
+      </label>
+    </div>
+  </form>
+</div>      
+
+{% endblock %}
+
+
