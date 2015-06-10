@@ -153,7 +153,7 @@ def delete_position(position_id):
     """Deletes a user's position."""
     if "user_id" in session:
         position = Position.query.filter_by(position_id=position_id).one()
-        print position
+
         if request.method == 'POST':
             Position.query.filter_by(position_id=position_id).delete()
             db.session.commit()

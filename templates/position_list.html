@@ -1,15 +1,25 @@
 {% extends 'base.html' %}
 {% block body %}
-
-    <h2>Positions</h2>
-    <ul>
-      {% for position in positions %}
-          <li>
-              <a href="/position/{{ position.position_id }}" >
-                {{ position.title }} ({{ position.company_name }})
-              </a>
-          </li>
-      {% endfor %}
-    </ul>
+  <div class="container">
+    <div class="row">
+      <div class="page-header col-lg-12">
+        <h2>Positions</h2>
+        <p class="lead">You're a champion! Keep on hunting!</p>
+      </div>
+    </div>
+    <div class="row">
+      <br>
+      <br>
+      <ul>
+        {% for position in positions %}
+            <li>
+                <a href="/position/{{ position.position_id }}" >
+                  {{ position.title }} ({{ position.company_name }})
+                </a>
+            </li>
+        {% endfor %}
+      </ul>
+  </div>
+  </div>
 
 {% endblock %}
