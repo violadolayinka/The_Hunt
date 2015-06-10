@@ -1,18 +1,60 @@
-/*body {
-      background-image: url("the_hunt_blur.jpg");
-      color: #212121;
-      /*text-align: center;*/
-      /*text-shadow: 0 px 0px rgba(0,0,0,.5);*/
-     /* font-family: 'Open Sans Condensed', sans-serif;*/
-   /* }*/
 
-#background_img{
-  background-image: url("/static/img/the_hunt.jpg");
-  /*-webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;*/
-  background-size: cover;
+body { 
+  padding-bottom: 90px;
+  background-image: url("/static/img/linedpaper/linedpaper.png");
+  font-family: 'Open Sans', sans-serif;
 }
+.navbar-header {
+  background-color: #bf3e11;
+  border-color: #bf3e11;
+}
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.wrap { 
+  background-image: url("/static/img/the_hunt.jpg");
+  height: 1000px;
+  background-size: cover;
+  padding: 1em;
+}
+
+.homepage-login-form {
+  opacity: 0.6;
+  background-color: white;
+  border-radius: 25px;
+}
+
+.homepage-login-form:hover {
+  opacity: 0.9;
+}
+
+.homepage-login-form form {
+  padding: 1em;
+}
+
+
+
+
+/*#background_img{
+  background-image: url("/static/img/the_hunt.jpg");
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}*/
+
+#wrap {
+    min-height: 100%;
+    height: auto;
+    height: 100%;
+    /* Negative indent footer by it's height */
+    margin-bottom: 80px auto;
+}
+
 
 
 .form-group{
@@ -44,6 +86,10 @@ a:hover {
   background-color: #ffffff;
 }
 
+/*.navbar:hover {
+  background: #0DD6FF;
+}*/
+
 .label-as-badge {
     border-radius: 1em;
 }
@@ -61,6 +107,14 @@ a:hover {
     background-image:url("../static/img/ViolaSP2015.png");
     display:block;
     position:absolute;
+
+}
+.list-group-item-heading{
+  font-family: 'Montserrat', sans-serif;
+}
+
+.submit{
+  font-family: 'Open Sans', sans-serif;
 }
 .dropdown:hover .dropdown-menu {
     display: block;
@@ -69,7 +123,7 @@ a:hover {
     margin-top: 0px;
 }
 .label-as-badge {
-    border-radius: 1em;
+    border-radius: 3em;
 }
 
 .box_text{
@@ -77,12 +131,17 @@ a:hover {
   
 }
 .list-group-item-description {
-    padding: 1em;
+   /* padding: 1em;*/
+   font-family: 'Open Sans', sans-serif;
   
 }
 .list-group-item-text {
     position:relative;
   
+}
+
+.lead{
+  font-weight: 100;
 }
 .box {
   background: #eaeaed;
@@ -94,10 +153,26 @@ a:hover {
   border-radius: 25px;
   
 }
+
+.btn-block {
+  background-color: purple;
+  color: white;
+}
+
+.btn {
+  font-family: 'Open Sans', sans-serif;
+}
+.btn-info {
+  background-color: #dd4814;
+  border-color: #dd4814;
+}
 .box:hover {
   background: #0DD6FF;
 }
+.lead {
+  font-family: 'Open Sans', sans-serif;
 
+}
 .footer { 
     display: block;
     font-family: 'Open Sans', sans-serif;
@@ -106,7 +181,9 @@ a:hover {
    font-size: 2.5em;
    padding: 0;
    margin: 0;
+   font-family: 'Montserrat', sans-serif;
 }
 .page-sub-header {
    font-size: 1.875em;
+   font-family: 'Open Sans', sans-serif;
 }
