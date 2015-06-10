@@ -181,6 +181,7 @@ def position(position_id):
     """Shows info about a position."""
     if "user_id" in session:
         position = Position.query.filter_by(position_id=position_id).one()
+        # positions = Position.query.filter_by(user_id=session['user_id']).one()
         print "Here's the user currently in session"
         print "This is the position userid", position.user_id
 

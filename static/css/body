@@ -1,7 +1,0 @@
-body
-{
-    background: url("../static/img/the_hunt.jpg") fixed;
-    background-size: cover;
-    padding: 0;
-    margin: 0;
-}

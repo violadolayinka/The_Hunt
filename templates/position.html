@@ -1,36 +1,96 @@
 {% extends 'base.html' %}
 {% block body %}
 
+  <div class="container">
+    <div class="page-header">
+      <div class="row">
+        <div class="col-md-6 col-lg-12" align="left">
+          <h3>{{ position.title }} ({{ position.company_name }})</h3>
+         <p class="lead" align="left">
+          <a href="{{ position.position_url }}" target="_blank"><strong>View the original posting here!</strong></a>
+         </p>
+         <p class="lead" align="left"><strong>Deadline: </strong>{{ position.deadline }}</p>
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <div class="row">
+      <div class="col-md-6 col-lg-6" align="left">
+        <p class="lead"><strong>Location: </strong>{{ position.location }}</p>
+      </div>
+      <div class="col-md-6 col-lg-6" align="center"> 
+            {% if position.application_status == "in progress" %}
+              <span class="btn btn-info btn-lg">
+                  {{position.application_status}}
+              </span>
+            {% endif %}
 
-    <h3>{{ position.title }} ({{ position.company_name }})</h3>
+            {% if position.application_status == "complete" %}
+              <span class="btn btn-success btn-lg">
+                {{position.application_status}}
+              </span>
+            {% endif %}
 
-    <p><strong>Deadline:</strong> {{ position.deadline }}</p>
-    <p><strong>Location:</strong> {{ position.location }}</p>
-    <p><strong>Application Status:</strong> {{ position.application_status }}</p>
-    <p><strong>Have you made progress on this application? Update your status here:</strong></p>
-       <form action="/position/{{position.position_id}}" method='POST'>
-          <label for="application_status"><strong>Updated Application Status:</strong></label>
-          <input type="radio" name="status" value="not yet started"> Not Yet Started?
-          <input type="radio" name="status" value="in progress"> In Progress  
-          <input type="radio" name="status" value="complete"> Complete 
-          <input type="radio" name="status" value="rejected"> Rejected
-          </label>
-          <button type="submit">Submit</button>
-        </form>
+            {% if position.application_status == "rejected" %}
+              <span class="btn btn-warning btn-lg">
+                  {{position.application_status}}
+              </span>
+            {% endif %}
 
-    <p><strong>Position Summary:</strong> <br>{{ position.position_summary }}</p>
-    <p><strong>Position Url:</strong><br> <a href="{{ position.position_url }}" target="_blank">{{ position.position_url }}</a></p>
- 
+            {% if position.application_status == "not yet started" %}
+              <span class="btn btn-danger btn-lg">
+                  {{position.application_status}}
+              </span>
+            {% endif %}
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-6 col-lg-6" align="left">
+        <p class="lead"><strong>Position Summary:</strong><br>
+          {{ position.position_summary }}</p>
+      </div>
+      <div class="col-md-6 col-lg-6">
+        <div class="well bs-component">
+          <form class="form-horizontal">
+            <legend>Have you made progress on this job app?</legend>
+              <div class="radio">
+                <form action="/position/{{position.position_id}}" method='POST'>
+                  <input type="radio" name="status" value="not yet started"> Not Yet Started?<br>
+                  <input type="radio" name="status" value="in progress"> In Progress<br>  
+                  <input type="radio" name="status" value="complete"> Complete<br>
+                  <input type="radio" name="status" value="rejected"> Rejected<br><br>
+                  <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                </form>
+              </div>
+            </legend>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-lg-6" align="left">
+        <div class="form-group">
+          <label for="select" class="col-lg-2 control-label">Document type:</label>
+          <div class="col-lg-10">
+            <select class="form-control" id="select" name="document_type">
+              <option value="cover letter">Cover Letter</option>
+              <option value="resume">Resume</option>
+              <option value="professional references">Professional References</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+        
   <h3>Upload your documents for this role here!</h3>
   <form action='/submit_documents' method='POST'>
     <input type="hidden" name="position_id" value="{{position.position_id}}">
-  <label for="title" required> What type of document is this? </label>
+  <label for="title" required>  </label>
   <br>
-      <select name="document_type">
-      <option value="cover letter">Cover Letter</option>
-      <option value="resume">Resume</option>
-      <option value="professional references">Professional References</option>
-      <option value="other">Other</option>
+      
      </select>
   <br>
   <br>
