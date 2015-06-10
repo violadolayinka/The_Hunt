@@ -8,13 +8,13 @@
       </div>
       <div class="col-md-4" align="right">
         <h3>Contacts for ({{ position.company_name }})</h3>
-          {% for contact in contacts %}
+     
             <h4>
-                {{ contact.name }}
-                {{ contact.phone_number}}
-                {{ contact.email_address}}
+                {{ contacts.name }}
+                {{ contacts.phone_number}}
+                {{ contacts.email_address}}
             </h4>
-          {% endfor %}
+          
       </div>
       <div class="row">
         <div class="col-md-8" align="left">
@@ -74,7 +74,7 @@
                   <input type="radio" name="status" value="in progress"> In Progress<br>  
                   <input type="radio" name="status" value="complete"> Complete<br>
                   <input type="radio" name="status" value="rejected"> Rejected<br><br>
-                  <button type="submit">Submit</button>
+                  <button type="submit" class="btn btn-default btn-lg btn-block">Submit</button>
                 </form>
               </div>
           </legend>
@@ -89,10 +89,8 @@
            <label for="title" required> What type of document is this? </label>
            <br>
                <select name="document_type">
-               <option value="cover_letter">Cover Letter</option>
                <option value="cover letter">Cover Letter</option>
                <option value="resume">Resume</option>
-               <option value="professional_references">Professional References</option>
                <option value="professional references">Professional References</option>
                <option value="other">Other</option>
               </select>
@@ -109,21 +107,21 @@
       <div class="col-md-6 col-lg-6">
           <h3>Documents for {{ position.title }} ({{ position.company_name }})</h3>
           <ul>
-            {% for document in document %}
+  
                 <li>
                     <a href="/document/{{ document.document_id}}">
                       {{ document.document_type }}
                     </a>
                 </li>
-            {% endfor %}
+            
           </ul>
           <h3>Notes on {{ position.title }} ({{ position.company_name }})</h3>
             <ul>
-              {% for note in notes %}
+            
                   <li>
-                    {{ note.note_details }}
+                    {{ notes.note_details }}
                   </li>
-              {% endfor %}
+             
             </ul>
           <br>
         </div>

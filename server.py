@@ -189,9 +189,9 @@ def position(position_id):
             flash("Whoops! You may have accessed the wrong page!")
             return redirect('/dashboard')
 
-        notes = Notes.query.filter_by(position_id=position_id).all()
-        document = Documents.query.filter_by(position_id=position_id).all()
-        contacts = Contact.query.filter_by(position_id=position_id).all()
+        notes = Notes.query.filter_by(position_id=position_id).first()
+        document = Documents.query.filter_by(position_id=position_id).first()
+        contacts = Contact.query.filter_by(position_id=position_id).first()
 
         if request.method == "POST":
             new_application_status = request.form["status"]

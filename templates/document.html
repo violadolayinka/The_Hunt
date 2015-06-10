@@ -1,8 +1,19 @@
 {% extends 'base.html' %}
 {% block body %}
 
-  <h1>{{ document.document_type }} </h1>
+<div class="container">
+    <div class="row">
+      <div class="page-header col-lg-12">
+        <h2>{{ document.document_type }} </h2>
+        <p class="lead">Keep it up!</p>
+      </div>
+    </div>
+    <div class="row">
+      <br>
+      <br>
+      <p>Details: {{ document.document_content }}</p>
+    </div>
+</div>
 
-  <p>Details: {{ document.document_content }}</p>
  
 {% endblock %}
