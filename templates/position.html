@@ -107,21 +107,21 @@
       <div class="col-md-6 col-lg-6">
           <h3>Documents for {{ position.title }} ({{ position.company_name }})</h3>
           <ul>
-  
+              {% if document %}
                 <li>
                     <a href="/document/{{ document.document_id}}">
                       {{ document.document_type }}
                     </a>
                 </li>
-            
+              {% endif %}
           </ul>
           <h3>Notes on {{ position.title }} ({{ position.company_name }})</h3>
             <ul>
-            
+                {% if notes %}
                   <li>
                     {{ notes.note_details }}
                   </li>
-             
+                {% endif %}
             </ul>
           <br>
         </div>

@@ -12,11 +12,11 @@
       <br>
       <ul>
         {% for position in positions %}
-            <li>
+            <h4><li>
                 <a href="/position/{{ position.position_id }}" >
-                  {{ position.title }} ({{ position.company_name }})
+                  <b>{{ position.title }}</b>  ({{ position.company_name }})
                 </a>
-            </li>
+            </h4></li>
         {% endfor %}
       </ul>
   </div>
