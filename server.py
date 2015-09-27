@@ -1,17 +1,18 @@
 """HB Spring 2015 Final project."""
-
 from jinja2 import StrictUndefined
 from datetime import datetime
 from flask import Flask, render_template, request, flash, redirect, session
 # from flask_debugtoolbar import DebugToolbarExtension
 from model import connect_to_db, db, User, Position, Documents, Notes, Contact
+import requests
+
 
 
 app = Flask(__name__)
 
 app.secret_key = "ABC"
 
-app.jinja_env.undefined = StrictUndefined
+# app.jinja_env.undefined = StrictUndefined
 
 
 @app.route('/')
@@ -19,8 +20,28 @@ def index():
     return render_template("welcomepage.html")
 
 
+@app.route('/api_test', methods=['GET', 'POST'])
+def api_test():
+    # import pdb; pdb.set_trace();
+    if request.method == 'GET':
+        return render_template("apitest.html")
+    else:
+        zip_code = request.form.get("zipcode")
+        r = requests.get('http://api.zippopotam.us/us/%s' % zip_code)
+        # import pdb; pdb.set_trace();
+        city = r.json()['places'][0]['place name']
+        state = r.json()['places'][0]['state']
+        # import pdb; pdb.set_trace()
+        abbreviaton = r.json()['places'][0]['state abbreviation']
+        country = r.json()['country']
+
+        # print r
+        return render_template("apitest.html", city_name=city, state_name=state, country_name=country, abbreviate=abbreviaton)
+
+
 @app.route('/login', methods=['POST'])
 def login_process():
+    # import pdb; pdb.set_trace();
     """Process login."""
     email_address = request.form.get("email")
     password = request.form.get("password")

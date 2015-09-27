@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Hunt</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans:300italic,400italic,600italic,700italic,800italic,700,300,600,800,400' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../static/css/the_hunt.css">
+</head>
+<body>
+
+  <form action="/api_test" method='POST'>
+    <input type="text" name="zipcode">
+    <input type="submit" value="Submit">
+  </form>
+  <p>City: {{city_name}} </p><br>
+  <p>State: {{state_name}} </p><br>
+  <p>Country: {{country_name}}</p><br>
+  <p>Abbreviation: {{abbreviate}}</p>
+
+
+ <script src="http://code.jquery.com/jquery.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+</body>
+</html>
